@@ -1,14 +1,10 @@
-import pickle
-
 from regress.serializer import RegressSerializer
 
 
-class PickleSerializer(RegressSerializer):
-    """Good serializer for almost all Python objects. But binary"""
-    PICKLE_PROTOCOL_VERSION = 4
-
+class StringSerializer(RegressSerializer):
+    """Serializer only for string type (utf-8)"""
     def load(self, stream):
-        return pickle.load(stream)
+        return stream.read().decode("utf-8")
 
     def dump(self, obj, stream):
-        return pickle.dump(obj, stream, protocol=self.PICKLE_PROTOCOL_VERSION)
+        return stream.write(obj.encode("utf-8"))

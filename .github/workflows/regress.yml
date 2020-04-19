@@ -47,5 +47,5 @@ jobs:
       with:
         file: ./coverage.xml
         flags: unittests
-        name: codecov-egress
+        name: codecov-regress
         fail_ci_if_error: true
