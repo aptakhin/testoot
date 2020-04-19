@@ -8,11 +8,11 @@ from distutils.core import setup
 
 setup(
 	name="regress",
-	version="0.0.1",
+	version="0.0.2",
 	long_description=open(os.path.join(os.path.dirname(__file__),
                                        "README.md")).read(),
 	long_description_content_type="text/markdown",
-	package_dir={"regress": "src/regress"},
+	package_dir={"regress": "regress"},
 	packages=[
 		"regress",
 		"regress.ext",

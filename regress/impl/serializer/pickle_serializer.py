@@ -1,9 +1,10 @@
 import pickle
 
-from src.regress.serializer import RegressSerializer
+from regress.serializer import RegressSerializer
 
 
 class PickleSerializer(RegressSerializer):
+    """Good serializer for almost all Python objects. But binary"""
     PICKLE_PROTOCOL_VERSION = 4
 
     def load(self, stream):

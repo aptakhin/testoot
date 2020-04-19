@@ -1,14 +1,15 @@
-import os
-import pickle
-from pathlib import Path
 from typing import Optional
 
-from src.regress.context import RegressContext
-from src.regress.serializer import RegressSerializer
-from src.regress.storage import RegressStorage
+from regress.context import RegressContext
+from regress.serializer import RegressSerializer
+from regress.storage import RegressStorage
 
 
 class Regress:
+    """
+    Main regression management object. Can test and canonize data.
+    """
+
     def __init__(self, storage: RegressStorage, serializer: RegressSerializer):
         self._storage: RegressStorage = storage
         self._serializer: RegressSerializer = serializer
@@ -23,7 +24,6 @@ class Regress:
         context
         :return:
         """
-
         storage_name = context.get_storage_name(suffix=suffix)
         with self._storage.open_read(storage_name) as rstream:
             if rstream is not None:

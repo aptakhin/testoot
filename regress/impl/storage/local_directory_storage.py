@@ -3,7 +3,7 @@ from io import IOBase
 from pathlib import Path
 from typing import Optional
 
-from src.regress.storage import RegressStorage
+from regress.storage import RegressStorage
 
 
 class IoWrapper:
@@ -19,6 +19,7 @@ class IoWrapper:
 
 
 class LocalDirectoryStorage(RegressStorage):
+    """Local directory storage"""
     def __init__(self, root_dir):
         self._root_dir = Path(root_dir)
 

@@ -1,42 +1,45 @@
 import pytest
 
-from src.regress.ext.pytest import RegressFixture
-from src.regress.ext.simple import LocalRegress
+from regress.ext.pytest import PytestContext
+from regress.ext.simple import LocalRegress
+from regress.fixture import RegressFixture
 
 
 @pytest.fixture(scope='module')
-def local_regress_instance():
+def regress_instance():
     regress = LocalRegress()
     regress.ensure_exists(clear=True)
     yield regress
 
 
 @pytest.fixture(scope='function')
-def local_regress(local_regress_instance, request):
-    fixture = RegressFixture(local_regress_instance, request)
+def regress(regress_instance, request):
+    fixture = RegressFixture(regress_instance, PytestContext(request))
     yield fixture
 
 
-def test_simple(local_regress: RegressFixture):
+def test_simple(regress: RegressFixture):
     result = {'a': 1}
-    local_regress.test(result)  # Commit
+    regress.test(result)  # Commit
 
-    local_regress.test(result)  # No changes
+    result2 = {'a': 1}
+    regress.test(result2)  # No changes
 
-    result2 = {'a': 2}  # Try commit change
+    result3 = {'a': 2}  # Try commit change
     with pytest.raises(AssertionError) as e:
-        local_regress.test(result2)
+        regress.test(result3)
 
 
-def test_simple2(local_regress: RegressFixture):
-    result = {'a': 2}
-    local_regress.test(result)  # Commit
+def test_simple_duplicate(regress: RegressFixture):
+    result = {'a': 1}
+    regress.test(result)  # Commit
 
-    local_regress.test(result)  # No changes
+    result2 = {'a': 1}
+    regress.test(result2)  # No changes
 
-    result2 = {'a': 3}  # Try commit change
+    result3 = {'a': 2}  # Try commit change
     with pytest.raises(AssertionError) as e:
-        local_regress.test(result2)
+        regress.test(result3)
 
 
 if __name__ == '__main__':
