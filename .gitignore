@@ -1,1 +1,5 @@
+# Ignore build docs
+docs/build/
+
+# Ignore regress generated
 .regress/
