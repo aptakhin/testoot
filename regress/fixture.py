@@ -14,4 +14,5 @@ class RegressFixture:
         return self._regress.test(obj, context=self._context, suffix=suffix)
 
     def canonize(self, obj: any, suffix: Optional[str] = None):
-        return self._regress.canonize(obj, context=self._context, suffix=suffix)
+        return self._regress.canonize(obj, context=self._context,
+                                      suffix=suffix)

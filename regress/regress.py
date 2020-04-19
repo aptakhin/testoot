@@ -15,7 +15,7 @@ class Regress:
         self._serializer: RegressSerializer = serializer
 
     def test(self, obj: any, context: RegressContext,
-             suffix: Optional[str]=None):
+             suffix: Optional[str] = None):
         """Tests object
 
         :param obj: test object
@@ -35,7 +35,7 @@ class Regress:
         return True
 
     def canonize(self, obj: any, context: RegressContext,
-             suffix: Optional[str]=None):
+                 suffix: Optional[str] = None):
         """Canonizes results of tests
 
         :param obj: test object
