@@ -8,7 +8,7 @@ from distutils.core import setup
 
 setup(
 	name="regress",
-	version="0.0.2",
+	version="0.0.3",
 	long_description=open(os.path.join(os.path.dirname(__file__),
                                        "README.md")).read(),
 	long_description_content_type="text/markdown",
@@ -36,5 +36,9 @@ setup(
 		"License :: OSI Approved :: MIT License",
 		"Programming Language :: Python",
 		"Topic :: Software Development",
+		"Framework :: Pytest",
+		"Topic :: Software Development :: Testing",
+		"Topic :: Software Development :: Quality Assurance",
+		"Topic :: Software Development :: Testing :: Unit",
 	],
 )
