@@ -8,7 +8,7 @@ Early draft for regression testing framework in Python 3.4+. Currently integrate
 
 ## Example
 
-    # regress is the helper fixture easy to setup
+    # regress is the function scope helper fixture easy to setup
     def test_simple(regress: RegressFixture):
         result = {'a': 1}
         regress.test(result)  # Commit

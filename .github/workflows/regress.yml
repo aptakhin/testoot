@@ -38,3 +38,14 @@ jobs:
       run: |
         pip install pytest
         pytest -s tests
+    - name: Generate coverage report
+      run: |
+        pip install pytest-cov
+        pytest --cov=regress --cov-report=xml
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-egress
+        fail_ci_if_error: true
