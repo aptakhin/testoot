@@ -1,8 +1,8 @@
 # Regress
 
 ![](https://github.com/aptakhin/regress/workflows/Regress%20test/badge.svg)
+[![codecov](https://codecov.io/gh/aptakhin/regress/branch/master/graph/badge.svg)](https://codecov.io/gh/aptakhin/regress)
 [![Documentation Status](https://readthedocs.org/projects/regress/badge/?version=latest)](https://regress.readthedocs.io/en/latest/?badge=latest)
-
 
 Early draft for regression testing framework in Python 3.4+. Currently integrates best with the PyTest, but other frameworks are also welcomed. Regression testing is useful in unit and module testing when rewriting test data creating is too boring. After you canonized the ideal output result all tests will pass until the data changes moment.
 
