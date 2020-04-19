@@ -1,5 +1,7 @@
 # Regress
 
+![](https://github.com/aptakhin/regress/workflows/Regress%20test/badge.svg)
+
 Early draft for regression testing in Python 3.4+. Currently integrates best with PyTest, but other frameworks are also welcomed. Regression testing is useful in unit and module testing when rewriting test data creating is too boring. After you canonized the ideal output result all tests will pass until the data change moment.
 
 ## Example

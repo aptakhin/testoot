@@ -26,7 +26,7 @@ class PytestContext(RegressContext):
 
 
 class RegressFixture:
-    def __init__(self, regress: Regress, request: 'FixtureRequest'):
+    def __init__(self, regress: Regress, request):
         self._regress = regress
         self._context = PytestContext(request)
 
