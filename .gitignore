@@ -1,5 +1,11 @@
-# Ignore build docs
+# Build docs
 docs/build/
 
-# Ignore regress generated
+# Regress generated
 .regress/
+
+# Local coverage
+.coverage
+
+# Manifest file
+MANIFEST
