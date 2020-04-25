@@ -20,3 +20,8 @@ FileType is the hint from the serializer to which file type result can be saved 
 
 .. automodule:: regress.file_type
   :members:
+
+Exceptions
+
+.. automodule:: regress.exceptions
+  :members:

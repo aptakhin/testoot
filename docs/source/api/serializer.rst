@@ -4,11 +4,11 @@ Serializers
 .. automodule:: regress.serializer
   :members:
 
-.. automodule:: regress.impl.serializer.json_serializer
+.. autoclass:: regress.pub.JsonSerializer
   :members:
 
-.. automodule:: regress.impl.serializer.pickle_serializer
+.. autoclass:: regress.pub.PickleSerializer
   :members:
 
-.. automodule:: regress.impl.serializer.string_serializer
+.. autoclass:: regress.pub.StringSerializer
   :members:

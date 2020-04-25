@@ -2,11 +2,9 @@ import pytest
 
 from regress.ext.pytest import PytestContext
 from regress.fixture import RegressFixture
-from regress.impl.run_policy.ask_canonize_policy import AskCanonizePolicy
-from regress.impl.serializer.json_serializer import JsonSerializer
-from regress.impl.storage.local_directory_storage import LocalDirectoryStorage
-from regress.impl.user_interaction.constant_interaction import \
-    ConstantUserInteraction
+from regress.pub import \
+    AskCanonizePolicy, JsonSerializer, ConstantUserInteraction, \
+    LocalDirectoryStorage
 from regress.regress import Regress
 
 

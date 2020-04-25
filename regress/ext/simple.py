@@ -1,8 +1,5 @@
-from regress.impl.run_policy.no_canonize_policy import NoCanonizePolicy
-from regress.impl.serializer.pickle_serializer import PickleSerializer
-from regress.impl.storage.local_directory_storage import \
-    LocalDirectoryStorage
-from regress.regress import Regress
+from regress.pub import NoCanonizePolicy, PickleSerializer, \
+    LocalDirectoryStorage, Regress
 
 
 class LocalRegress(Regress):

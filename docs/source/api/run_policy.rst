@@ -4,8 +4,8 @@ Run policy
 .. automodule:: regress.run_policy
   :members:
 
-.. automodule:: regress.impl.run_policy.ask_canonize_policy
+.. autoclass:: regress.pub.AskCanonizePolicy
   :members:
 
-.. automodule:: regress.impl.run_policy.no_canonize_policy
+.. autoclass:: regress.pub.NoCanonizePolicy
   :members:

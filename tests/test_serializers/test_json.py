@@ -2,7 +2,7 @@ from io import StringIO
 
 import pytest
 
-from regress.impl.serializer.json_serializer import JsonSerializer
+from regress.pub import JsonSerializer
 
 
 def test_simple():

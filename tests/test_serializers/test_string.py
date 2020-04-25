@@ -2,8 +2,7 @@ from io import StringIO
 
 import pytest
 
-from regress.exceptions import UnserializableTypeError
-from regress.impl.serializer.string_serializer import StringSerializer
+from regress.pub import StringSerializer, UnserializableTypeError
 
 
 def test_simple():

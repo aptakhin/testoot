@@ -24,13 +24,11 @@ Pytest configuration is the quite simple::
     from regress.ext.simple import LocalRegress
     from regress.fixture import RegressFixture
 
-
     @pytest.fixture(scope='module')
     def regress_instance():
         regress = LocalRegress()
         regress.ensure_exists(clear=True)
         yield regress
-
 
     @pytest.fixture(scope='function')
     def regress(regress_instance, request):
@@ -41,12 +39,7 @@ Pytest configuration is the quite simple::
 
 LocalRegress is the configured class::
 
-    from regress.impl.run_policy.no_canonize_policy import NoCanonizePolicy
-    from regress.impl.serializer.pickle_serializer import PickleSerializer
-    from regress.impl.storage.local_directory_storage import \
-        LocalDirectoryStorage
-    from regress.regress import Regress
-
+    from regress.pub import NoCanonizePolicy, PickleSerializer, LocalDirectoryStorage, Regress
 
     class LocalRegress(Regress):
         def __init__(self):
@@ -56,8 +49,8 @@ LocalRegress is the configured class::
                 run_policy=NoCanonizePolicy(),
             )
 
-It uses local filesystem storage in `.regress` directory.
+It uses local filesystem storage in `.regress` directory in `storage` parameter.
 
-All objects are dumped with pickle serializer, which is supports almost all Python objects, but has only binary representantion in files. It'll be difficult to merge binary changes in the favourite VCS without running code.
+All objects are dumped with pickle `serializer` :py:class:`.regress.pub.PickleSerializer`, which is supports almost all Python objects, but has only binary representantion in files. It'll be difficult to merge binary changes in the favourite VCS without running code. Also you can find other types in `Serializers <../api/serializer.html>`__.
 
-And third `run_policy` option shows running tests behaviour when we met result test conflict. :py:class:`.regress.impl.run_policy.no_canonize_policy.NoCanonizePolicy` raises an error in assert. :py:class:`.regress.impl.run_policy.ask_canonize_policy.AskCanonizePolicy` can ask user approval for canonizing new behaviour or skipping it later and raising an error in assert then. Latter can't be used in automated tests, but is useful in manual runs.
+And third `run_policy` option shows running tests behavior when we met result test conflict. :py:class:`.regress.pub.NoCanonizePolicy` raises an error in assert. :py:class:`.regress.pub.AskCanonizePolicy` can ask user approval for canonizing new behaviour or skipping it later and raising an error in assert then. Latter can't be used in automated tests, but is useful in manual runs.

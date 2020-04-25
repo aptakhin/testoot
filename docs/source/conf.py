@@ -32,6 +32,7 @@ release = '0.0.3dev'
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.autosectionlabel',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -62,4 +63,8 @@ autoclass_content = 'both'
 autodoc_default_options = {
     'special-members': '__init__',
     'undoc-members': True,
+}
+
+html_sidebars = {
+   '**': ['globaltoc.html', 'relations.html', 'sourcelink.html', 'searchbox.html'],
 }
