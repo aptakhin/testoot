@@ -36,6 +36,7 @@ def console_regress(console_regress_instance, request):
     yield fixture
 
 
+@pytest.mark.skip
 def test_simple(console_regress: RegressFixture):
     result = {'a': 1}
     console_regress.test(result)  # Commit
