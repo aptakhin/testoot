@@ -12,6 +12,12 @@ class Regress:
 
     def __init__(self, storage: RegressStorage, serializer: RegressSerializer,
                  run_policy: RunPolicy):
+        """Constructor
+
+        :param storage: storage instance
+        :param serializer: serializer instance
+        :param run_policy: run policy instance
+        """
         self._storage: RegressStorage = storage
         self._serializer: RegressSerializer = serializer
         self._run_policy: RunPolicy = run_policy

@@ -6,18 +6,17 @@ Example::
     # regress is the helper fixture easy to setup
     def test_simple(regress: RegressFixture):
         result = {'a': 1}
-        regress.test(result)  # Commit
+        regress.test(result)  # Commit first time
 
         result2 = {'a': 1}
-        regress.test(result2)  # Ok. No changes
+        regress.test(result2)  # Ok. No object result changes
 
         result3 = {'a': 3}  # Try commit change. Raised the AssertionError
         with pytest.raises(AssertionError) as e:
             regress.test(result3)
 
 
-
-Configuration is quite simple::
+Pytest configuration is the quite simple::
 
     import pytest
 
@@ -40,7 +39,7 @@ Configuration is quite simple::
         yield fixture
 
 
-LocalRegress is the simply configured class::
+LocalRegress is the configured class::
 
     from regress.impl.run_policy.no_canonize_policy import NoCanonizePolicy
     from regress.impl.serializer.pickle_serializer import PickleSerializer
