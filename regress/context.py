@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Optional
 
-from regress.filetype import FileType
+from regress.file_type import FileType
 
 
 class RegressContext(ABC):

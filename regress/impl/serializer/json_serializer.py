@@ -1,7 +1,7 @@
 import json
 from typing import Optional
 
-from regress.filetype import FileType
+from regress.file_type import FileType
 from regress.serializer import RegressSerializer
 
 

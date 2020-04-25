@@ -42,7 +42,7 @@ class LocalDirectoryStorage(RegressStorage):
         """
         if clear and self._root_dir.exists():
             if self._root_dir == '/':
-                raise ValueError("Please not remove root!")
+                raise ValueError("Please do not remove root!")
             shutil.rmtree(self._root_dir)
 
         self._root_dir.mkdir(parents=True, exist_ok=True)

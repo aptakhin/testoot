@@ -1,7 +1,7 @@
 from typing import Optional
 
 from regress.context import RegressContext
-from regress.filetype import FileType
+from regress.file_type import FileType
 
 
 def _make_filename_from_pytest_nodeid(nodeid):

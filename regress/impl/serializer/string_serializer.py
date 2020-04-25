@@ -1,7 +1,7 @@
 from typing import Optional
 
 from regress.exceptions import UnserializableTypeError
-from regress.filetype import FileType
+from regress.file_type import FileType
 from regress.serializer import RegressSerializer
 
 

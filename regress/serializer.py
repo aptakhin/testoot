@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from regress.filetype import FileType
+from regress.file_type import FileType
 
 
 class RegressSerializer(ABC):
