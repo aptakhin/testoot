@@ -6,8 +6,8 @@ from regress.regress import Regress
 
 
 class LocalRegress(Regress):
-    """The most simple configured Regress. Stores files in .regress folder and
-    with pickle serializer"""
+    """The most simple configured Regress. Stores files in .regress folder
+    with pickle serializer and throws errors on conflict output"""
     def __init__(self):
         super().__init__(
             storage=LocalDirectoryStorage('.regress'),

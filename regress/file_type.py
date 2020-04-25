@@ -9,8 +9,8 @@ class FileTypeNoExtension:
 
 @dataclass
 class FileType:
-    """
-    File type hint for tests.
+    """File type hint for tests.
+
     :param mime: required MIME type
     :param override_file_ext: override default MIME type extension
     """

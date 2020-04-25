@@ -8,9 +8,7 @@ from regress.storage import RegressStorage
 
 
 class Regress:
-    """
-    Main regression management object. Can test and canonize data.
-    """
+    """Main regression management object. Can test and canonize data."""
 
     def __init__(self, storage: RegressStorage, serializer: RegressSerializer,
                  run_policy: RunPolicy):
@@ -25,9 +23,10 @@ class Regress:
 
         :param obj: test object
         :param context: test context
-        :param suffix: suffix for test for making a few regression tests in one
-        context
+        :param suffix: suffix for test for making a few regression tests
+               in one context
         :param file_type_hint: override serializer hint for file
+
         :return:
         """
         if file_type_hint is None:
@@ -64,6 +63,7 @@ class Regress:
         :param context: test context
         :param suffix: suffix for test for making a few regression tests in one
         :param file_type_hint: override serializer hint for file
+
         :return:
         """
         storage_name = context.get_storage_name(suffix=suffix,

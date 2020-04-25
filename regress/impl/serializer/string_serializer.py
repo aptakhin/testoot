@@ -1,3 +1,4 @@
+from io import IOBase
 from typing import Optional
 
 from regress.exceptions import UnserializableTypeError
@@ -12,10 +13,10 @@ class StringSerializer(RegressSerializer):
         super().__init__(file_type_hint=file_type_hint if file_type_hint else
                          FileType(mime='text/plain', override_file_ext='.txt'))
 
-    def load(self, stream):
+    def load(self, stream: IOBase) -> any:
         return stream.read()
 
-    def dump(self, obj, stream):
+    def dump(self, obj: any, stream: IOBase):
         if not isinstance(obj, str):
             raise UnserializableTypeError('Only str type is supported '
                                           'in StringSerializer!')

@@ -38,3 +38,27 @@ Configuration is quite simple::
         fixture = RegressFixture(regress_instance,
             PytestContext(request))
         yield fixture
+
+
+LocalRegress is the simply configured class::
+
+    from regress.impl.run_policy.no_canonize_policy import NoCanonizePolicy
+    from regress.impl.serializer.pickle_serializer import PickleSerializer
+    from regress.impl.storage.local_directory_storage import \
+        LocalDirectoryStorage
+    from regress.regress import Regress
+
+
+    class LocalRegress(Regress):
+        def __init__(self):
+            super().__init__(
+                storage=LocalDirectoryStorage('.regress'),
+                serializer=PickleSerializer(),
+                run_policy=NoCanonizePolicy(),
+            )
+
+It uses local filesystem storage in `.regress` directory.
+
+All objects are dumped with pickle serializer, which is supports almost all Python objects, but has only binary representantion in files. It'll be difficult to merge binary changes in the favourite VCS without running code.
+
+And third `run_policy` option shows running tests behaviour when we met result test conflict. :py:class:`.regress.impl.run_policy.no_canonize_policy.NoCanonizePolicy` raises an error in assert. :py:class:`.regress.impl.run_policy.ask_canonize_policy.AskCanonizePolicy` can ask user approval for canonizing new behaviour or skipping it later and raising an error in assert then. Latter can't be used in automated tests, but is useful in manual runs.

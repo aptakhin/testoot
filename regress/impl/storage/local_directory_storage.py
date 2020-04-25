@@ -36,7 +36,7 @@ class LocalDirectoryStorage(RegressStorage):
         return open(path, "w" + self._mode)
 
     def ensure_exists(self, clear=False):
-        """ Ensure local directory exists
+        """Ensure local directory exists
 
         :param clear: remove whole folder if exists
         :return:

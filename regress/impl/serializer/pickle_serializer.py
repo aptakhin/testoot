@@ -1,4 +1,5 @@
 import pickle
+from io import IOBase
 from typing import Optional
 
 from regress.file_type import FileType
@@ -14,8 +15,8 @@ class PickleSerializer(RegressSerializer):
                          FileType(mime='application/octet-stream',
                                   override_file_ext='.bin'))
 
-    def load(self, stream):
+    def load(self, stream: IOBase) -> any:
         return pickle.load(stream)
 
-    def dump(self, obj, stream):
+    def dump(self, obj: any, stream: IOBase):
         return pickle.dump(obj, stream, protocol=self.PICKLE_PROTOCOL_VERSION)

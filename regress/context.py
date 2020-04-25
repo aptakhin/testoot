@@ -5,7 +5,7 @@ from regress.file_type import FileType
 
 
 class RegressContext(ABC):
-    """Test context"""
+    """Abstract test context"""
     @abstractmethod
     def get_storage_name(self, file_type_hint: FileType,
                          suffix: Optional[str] = None):
