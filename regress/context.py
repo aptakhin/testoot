@@ -1,9 +1,12 @@
 from abc import ABC, abstractmethod
 from typing import Optional
 
+from regress.filetype import FileType
+
 
 class RegressContext(ABC):
     """Test context"""
     @abstractmethod
-    def get_storage_name(self, suffix: Optional[str] = None):
+    def get_storage_name(self, file_type_hint: FileType,
+                         suffix: Optional[str] = None):
         pass
