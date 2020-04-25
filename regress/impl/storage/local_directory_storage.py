@@ -20,19 +20,20 @@ class IoWrapper:
 
 class LocalDirectoryStorage(RegressStorage):
     """Local directory storage"""
-    def __init__(self, root_dir):
+    def __init__(self, root_dir, mode='b'):
         self._root_dir = Path(root_dir)
+        self._mode = mode
 
     def open_read(self, key: str) -> Optional[IOBase]:
         path = self._get_path(key)
         if not path.exists():
             return IoWrapper(None)
 
-        return open(self._get_path(key), "rb")
+        return open(self._get_path(key), "r" + self._mode)
 
     def open_write(self, key: str) -> IOBase:
         path = self._get_path(key)
-        return open(path, "wb")
+        return open(path, "w" + self._mode)
 
     def ensure_exists(self, clear=False):
         """ Ensure local directory exists

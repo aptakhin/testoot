@@ -1,3 +1,4 @@
+from regress.impl.run_policy.no_canonize_policy import NoCanonizePolicy
 from regress.impl.serializer.pickle_serializer import PickleSerializer
 from regress.impl.storage.local_directory_storage import \
     LocalDirectoryStorage
@@ -11,6 +12,7 @@ class LocalRegress(Regress):
         super().__init__(
             storage=LocalDirectoryStorage('.regress'),
             serializer=PickleSerializer(),
+            run_policy=NoCanonizePolicy(),
         )
 
     def ensure_exists(self, clear=False):
