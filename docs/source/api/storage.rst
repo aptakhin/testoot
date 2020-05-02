@@ -1,8 +1,8 @@
 Storage
 ===================================
 
-.. automodule:: regress.storage
+.. autoclass:: regress.base.RegressStorage
   :members:
 
-.. automodule:: regress.impl.storage.local_directory_storage
+.. autoclass:: regress.pub.LocalDirectoryStorage
   :members:

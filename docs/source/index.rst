@@ -10,7 +10,7 @@ Regress docs
    :maxdepth: 2
    :caption: Contents:
 
-   usage/index
+   quickstart
    api/index
    contents
 

@@ -1,6 +1,12 @@
 Quickstart
 ===================================
 
+You can install latest version from pypi::
+
+    pip3 install regress
+
+And use library such way.
+
 Example::
 
     # regress is the helper fixture easy to setup
@@ -39,18 +45,19 @@ Pytest configuration is the quite simple::
 
 LocalRegress is the configured class::
 
-    from regress.pub import NoCanonizePolicy, PickleSerializer, LocalDirectoryStorage, Regress
+    from regress.pub import NoCanonizePolicy, PickleSerializer, \
+        LocalDirectoryStorage, Regress
 
     class LocalRegress(Regress):
         def __init__(self):
             super().__init__(
                 storage=LocalDirectoryStorage('.regress'),
                 serializer=PickleSerializer(),
-                run_policy=NoCanonizePolicy(),
+                canonize_policy=NoCanonizePolicy(),
             )
 
 It uses local filesystem storage in `.regress` directory in `storage` parameter.
 
 All objects are dumped with pickle `serializer` :py:class:`.regress.pub.PickleSerializer`, which is supports almost all Python objects, but has only binary representantion in files. It'll be difficult to merge binary changes in the favourite VCS without running code. Also you can find other types in `Serializers <../api/serializer.html>`__.
 
-And third `run_policy` option shows running tests behavior when we met result test conflict. :py:class:`.regress.pub.NoCanonizePolicy` raises an error in assert. :py:class:`.regress.pub.AskCanonizePolicy` can ask user approval for canonizing new behaviour or skipping it later and raising an error in assert then. Latter can't be used in automated tests, but is useful in manual runs.
+And third `canonize_policy` option shows running tests behavior when we met result test conflict. :py:class:`.regress.pub.NoCanonizePolicy` raises an error in assert. :py:class:`.regress.pub.AskCanonizePolicy` can ask user approval for canonizing new behaviour or skipping it later and raising an error in assert then. Latter can't be used in automated tests, but is useful in manual runs.

@@ -1,5 +1,5 @@
-from .exceptions import UnserializableTypeError
 from .base import FileType
+from .exceptions import UnserializableTypeError
 from .fixture import RegressFixture
 from .impl.canonize_policies import AskCanonizePolicy, NoCanonizePolicy
 from .impl.serializer.json_serializer import JsonSerializer

@@ -1,7 +1,7 @@
 Serializers
 ===================================
 
-.. automodule:: regress.serializer
+.. autoclass:: regress.base.RegressSerializer
   :members:
 
 .. autoclass:: regress.pub.JsonSerializer

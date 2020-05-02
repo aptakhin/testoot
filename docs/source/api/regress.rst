@@ -1,9 +1,9 @@
 Regress
 ===================================
 
-Regress is the main logic class for testing. It's configured with storage, serializer and run policy.
+Regress is the main logic class for testing. It's configured by storage, serializer and canonize policy.
 
-.. automodule:: regress.regress
+.. autoclass:: regress.pub.Regress
   :members:
 
 Fixture is the helper class which incapsulates current Regress and test context state
@@ -13,12 +13,12 @@ Fixture is the helper class which incapsulates current Regress and test context 
 
 Context stores current test information.
 
-.. automodule:: regress.context
+.. autoclass:: regress.base.RegressContext
   :members:
 
 FileType is the hint from the serializer to which file type result can be saved for simplifying viewing and merging results.
 
-.. automodule:: regress.file_type
+.. autoclass:: regress.base.FileType
   :members:
 
 Exceptions
