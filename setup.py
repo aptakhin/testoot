@@ -4,7 +4,7 @@ from distutils.core import setup
 
 setup(
     name="regress",
-    version="0.0.3dev",
+    version="0.0.3",
     long_description=open(os.path.join(os.path.dirname(__file__),
                                        "README.md")).read(),
     long_description_content_type="text/markdown",

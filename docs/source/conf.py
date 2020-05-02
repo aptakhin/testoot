@@ -22,7 +22,7 @@ copyright = '2020, Alexander Ptakhin'
 author = 'Alexander Ptakhin'
 
 # The full version, including alpha/beta/rc tags
-release = '0.0.3dev'
+release = '0.0.3'
 
 
 # -- General configuration ---------------------------------------------------
