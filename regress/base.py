@@ -26,24 +26,28 @@ class FileType:
         return mimetypes.guess_extension(self.mime, strict=False)
 
 
+class Comparator(ABC):
+    """Abstract type comparator"""
+    @abstractmethod
+    def compare(self, test_obj: any, canon_obj: any):
+        """Compares objects"""
+        pass  # pragma: no cover
+
+
 class RegressContext(ABC):
     """Abstract test context"""
     @abstractmethod
     def get_storage_name(self, file_type_hint: FileType,
                          suffix: Optional[str] = None):
+        """Gets name for test"""
         pass  # pragma: no cover
 
     @abstractmethod
     def get_storage_name_from_filename(self, filename: str):
         pass  # pragma: no cover
 
-
-class Comparator(ABC):
-    """Abstract type comparator"""
     @abstractmethod
-    def compare(self, test_obj: any, canon_obj: any):
-        """Asks user for canonization or decide it by internal tests
-        policies"""
+    def get_comparator(self) -> Optional[Comparator]:
         pass  # pragma: no cover
 
 
