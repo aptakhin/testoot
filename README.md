@@ -29,7 +29,7 @@ One pytest function is the scope of the result. Newly calculated data compares w
         with pytest.raises(AssertionError) as e:
             regress.test(result3)
 
-To continue exploring you can visit the [quickstart](https://regress.readthedocs.io/en/latest/usage/quickstart.html).
+To continue exploring you can visit the [quickstart](https://regress.readthedocs.io/en/latest/quickstart.html).
 
 ## Using
 
@@ -46,6 +46,12 @@ Making virtualenv with development requirements:
     python3 -m venv venv
     venv/bin/pip install --upgrade pip
     venv/bin/pip install -r requirements.txt
+
+## Testing
+
+    venv/bin/pytest -s tests
+    venv/bin/flake8 regress --show-source --statistics
+    venv/bin/pytest --cov=regress --cov-report html
 
 ### Building docs
 

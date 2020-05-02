@@ -13,7 +13,7 @@ class ConsoleTestRegress(Regress):
         super().__init__(
             storage=LocalDirectoryStorage('.regress', mode='t'),
             serializer=JsonSerializer(),
-            run_policy=AskCanonizePolicy(ConsoleUserInteraction()),
+            canonize_policy=AskCanonizePolicy(ConsoleUserInteraction()),
         )
 
     def ensure_exists(self, clear=False):

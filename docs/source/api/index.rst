@@ -8,4 +8,4 @@ Api
    regress
    storage
    serializer
-   run_policy
+   canonize_policy

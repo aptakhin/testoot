@@ -1,7 +1,7 @@
-Run policy
+Canonize policy
 ===================================
 
-.. automodule:: regress.run_policy
+.. autoclass:: regress.base.CanonizePolicy
   :members:
 
 .. autoclass:: regress.pub.AskCanonizePolicy

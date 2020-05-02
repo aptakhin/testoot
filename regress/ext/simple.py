@@ -9,7 +9,7 @@ class LocalRegress(Regress):
         super().__init__(
             storage=LocalDirectoryStorage('.regress'),
             serializer=PickleSerializer(),
-            run_policy=NoCanonizePolicy(),
+            canonize_policy=NoCanonizePolicy(),
         )
 
     def ensure_exists(self, clear=False):
