@@ -1,7 +1,6 @@
 from typing import Optional
 
-from regress.context import RegressContext
-from regress.file_type import FileType
+from regress.base import RegressContext, FileType
 
 
 def _make_filename_from_pytest_nodeid(nodeid):
@@ -28,3 +27,6 @@ class PytestContext(RegressContext):
             name += file_ext
 
         return name
+
+    def get_storage_name_from_filename(self, filename: str):
+        return filename

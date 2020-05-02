@@ -2,8 +2,7 @@ from io import IOBase
 from typing import Optional
 
 from regress.exceptions import UnserializableTypeError
-from regress.file_type import FileType
-from regress.serializer import RegressSerializer
+from regress.base import FileType, RegressSerializer
 
 
 class StringSerializer(RegressSerializer):

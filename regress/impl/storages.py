@@ -3,7 +3,7 @@ from io import IOBase
 from pathlib import Path
 from typing import Optional
 
-from regress.storage import RegressStorage
+from regress.base import RegressStorage
 
 
 class IoWrapper:
@@ -22,6 +22,9 @@ class LocalDirectoryStorage(RegressStorage):
     """Local directory storage"""
     def __init__(self, root_dir, mode='b'):
         self._root_dir = Path(root_dir)
+        if self._root_dir == self._root_dir.parent:
+            raise ValueError("Root local storage is not supported due "
+                             "to safety reasons!")
         self._mode = mode
 
     def open_read(self, key: str) -> Optional[IOBase]:
@@ -42,8 +45,6 @@ class LocalDirectoryStorage(RegressStorage):
         :return:
         """
         if clear and self._root_dir.exists():
-            if self._root_dir == '/':
-                raise ValueError("Please do not remove root!")
             shutil.rmtree(self._root_dir)
 
         self._root_dir.mkdir(parents=True, exist_ok=True)

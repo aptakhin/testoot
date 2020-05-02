@@ -4,8 +4,10 @@ docs/build/
 # Regress generated
 .regress/
 
-# Local coverage
+# Coverages
 .coverage
+coverage.xml
+htmlcov/
 
 # Manifest file
 MANIFEST

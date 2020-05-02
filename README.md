@@ -46,6 +46,12 @@ Making virtualenv with development requirements:
     python3 -m venv venv
     venv/bin/pip install --upgrade pip
     venv/bin/pip install -r requirements.txt
+    
+## Testing
+
+    venv/bin/pytest -s tests
+    venv/bin/flake8 regress --show-source --statistics
+    venv/bin/pytest --cov=regress --cov-report html
 
 ### Building docs
 

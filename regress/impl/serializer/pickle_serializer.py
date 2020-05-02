@@ -2,8 +2,7 @@ import pickle
 from io import IOBase
 from typing import Optional
 
-from regress.file_type import FileType
-from regress.serializer import RegressSerializer
+from regress.base import FileType, RegressSerializer
 
 
 class PickleSerializer(RegressSerializer):

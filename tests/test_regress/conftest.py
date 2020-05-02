@@ -14,7 +14,7 @@ class TestRegress(Regress):
         super().__init__(
             storage=LocalDirectoryStorage('.regress', mode='t'),
             serializer=JsonSerializer(),
-            run_policy=AskCanonizePolicy(
+            canonize_policy=AskCanonizePolicy(
                 ConstantUserInteraction(canonize=False),
             ),
         )

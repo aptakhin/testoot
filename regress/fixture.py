@@ -1,6 +1,6 @@
 from typing import Optional
 
-from regress.context import RegressContext
+from regress.base import RegressContext
 from regress.regress import Regress
 
 
@@ -13,6 +13,5 @@ class RegressFixture:
     def test(self, obj: any, suffix: Optional[str] = None):
         return self._regress.test(obj, context=self._context, suffix=suffix)
 
-    def canonize(self, obj: any, suffix: Optional[str] = None):
-        return self._regress.canonize(obj, context=self._context,
-                                      suffix=suffix)
+    def test_filename(self, filename: str):
+        return self._regress.test_filename(filename, context=self._context)

@@ -66,5 +66,5 @@ autodoc_default_options = {
 }
 
 html_sidebars = {
-   '**': ['globaltoc.html', 'relations.html', 'sourcelink.html', 'searchbox.html'],
+   '**': ['globaltoc.html', 'relations.html', 'searchbox.html'],
 }
