@@ -2,9 +2,11 @@ import os
 
 from distutils.core import setup
 
+import regress
+
 setup(
     name="regress",
-    version="0.0.3",
+    version=regress.version,
     long_description=open(os.path.join(os.path.dirname(__file__),
                                        "README.md")).read(),
     long_description_content_type="text/markdown",
@@ -13,9 +15,7 @@ setup(
         "regress",
         "regress.ext",
         "regress.impl",
-        "regress.impl.context",
         "regress.impl.serializer",
-        "regress.impl.storage",
     ],
     author="Alexander Ptakhin",
     author_email="me@aptakhin.name",

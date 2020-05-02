@@ -14,6 +14,8 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('../..'))
 
+import regress
+
 
 # -- Project information -----------------------------------------------------
 
@@ -22,7 +24,7 @@ copyright = '2020, Alexander Ptakhin'
 author = 'Alexander Ptakhin'
 
 # The full version, including alpha/beta/rc tags
-release = '0.0.3'
+release = regress.version
 
 
 # -- General configuration ---------------------------------------------------
