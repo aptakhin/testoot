@@ -118,7 +118,6 @@ class Regress:
         with self._storage.open_write(storage_name,
                                       mode=serializer.mode) as wstream:
             serializer.dump(obj, wstream)
-            wstream.close()
 
     def _do_test(self, *, test_obj: any, canon_obj: any,
                  storage_name: str, context: RegressContext,
