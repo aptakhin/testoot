@@ -5,51 +5,22 @@ You can install latest version from pypi::
 
     pip3 install regress
 
-And use library such way.
+And use library such way:
 
-Example::
+.. literalinclude:: ../../../tests/test_examples/test_quickstart.py
+   :start-after: # region: test_simple
+   :end-before: # endregion: test_simple
 
-    # regress is the helper fixture easy to setup
-    def test_simple(regress: RegressFixture):
-        result = {'a': 1}
-        regress.test(result)  # Commit first time
+Pytest configuration is the quite simple:
 
-        result2 = {'a': 1}
-        regress.test(result2)  # Ok. No object result changes
+.. literalinclude:: ../../../tests/test_examples/test_quickstart.py
+   :start-after: # region: header
+   :end-before: # endregion: header
 
-        result3 = {'a': 3}  # Try commit change. Raised the AssertionError
-        with pytest.raises(AssertionError) as e:
-            regress.test(result3)
+Basically DefaultRegress is the configured class::
 
-
-Pytest configuration is the quite simple::
-
-    import pytest
-
-    from regress.ext.pytest import PytestContext, register_addoption
-    from regress.ext.simple import DefaultRegress
-    from regress.fixture import RegressFixture
-
-    def pytest_addoption(parser):
-        register_addoption(parser)
-
-    @pytest.fixture(scope='module')
-    def regress_instance():
-        regress = DefaultRegress()
-        regress.ensure_exists(clear=True)
-        yield regress
-
-    @pytest.fixture(scope='function')
-    def regress(regress_instance, request):
-        fixture = RegressFixture(regress_instance,
-            PytestContext(request))
-        yield fixture
-
-
-DefaultRegress is the configured class::
-
-    from regress.pub import NoCanonizePolicy, PickleSerializer, \
-        LocalDirectoryStorage, Regress
+    from regress.pub import Regress, AskCanonizePolicy, PickleSerializer, \
+        LocalDirectoryStorage, DefaultRegress, ConsoleUserInteraction
 
     class DefaultRegress(Regress):
         def __init__(self):

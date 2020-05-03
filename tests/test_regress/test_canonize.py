@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pytest
 
 from regress.fixture import RegressFixture
@@ -44,8 +46,8 @@ def test_suffix(test_regress: RegressFixture):
     test_regress.test(result2, suffix='_abc')  # Second test result
 
 
-def test_filename(test_regress: RegressFixture, tmp_path):
-    d = tmp_path / 'hello.json'
+def test_filename(test_regress: RegressFixture):
+    d = Path('.regress/test/hello.json')
     d.write_text('{}')
 
     test_regress.test_filename(str(d))  # Canonize

@@ -4,6 +4,9 @@ Serializers
 .. autoclass:: regress.base.RegressSerializer
   :members:
 
+.. autoclass:: regress.pub.BinarySerializer
+  :members:
+
 .. autoclass:: regress.pub.JsonSerializer
   :members:
 

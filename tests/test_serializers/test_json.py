@@ -1,4 +1,4 @@
-from io import StringIO
+from io import BytesIO, TextIOWrapper
 
 import pytest
 
@@ -8,15 +8,17 @@ from regress.pub import JsonSerializer
 def test_simple():
     serializer = JsonSerializer()
 
-    out = StringIO()
+    out = BytesIO()
+    wrapper = TextIOWrapper(out)
     obj = {'a': 1}
-    serializer.dump(obj, out)
+    serializer.dump(obj, wrapper)
+    wrapper.flush()
     out_bytes = out.getvalue()
-    assert out_bytes == '''{
+    assert out_bytes == b'''{
   "a": 1
 }'''
 
-    in_ = StringIO(out_bytes)
+    in_ = TextIOWrapper(BytesIO(out_bytes))
     read_obj = serializer.load(in_)
     assert read_obj == obj
 

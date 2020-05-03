@@ -1,5 +1,5 @@
 import shutil
-from io import IOBase
+from io import IOBase, TextIOWrapper
 from pathlib import Path
 from typing import Optional
 
@@ -20,23 +20,26 @@ class IoWrapper:
 
 class LocalDirectoryStorage(RegressStorage):
     """Local directory storage"""
-    def __init__(self, root_dir, mode='b'):
+    def __init__(self, root_dir):
         self._root_dir = Path(root_dir)
         if self._root_dir == self._root_dir.parent:
-            raise ValueError("Root local storage is not supported due "
-                             "to safety reasons!")
-        self._mode = mode
+            raise ValueError('Root local storage is not supported due '
+                             'to safety reasons!')
 
-    def open_read(self, key: str) -> Optional[IOBase]:
+    def open_read(self, key: str, mode: str) -> Optional[IOBase]:
         path = self._get_path(key)
         if not path.exists():
             return IoWrapper(None)
 
-        return open(self._get_path(key), "r" + self._mode)
+        stream = open(self._get_path(key), 'rb')
+        stream = TextIOWrapper(stream) if mode == 't' else stream
+        return stream
 
-    def open_write(self, key: str) -> IOBase:
+    def open_write(self, key: str, mode: str) -> IOBase:
         path = self._get_path(key)
-        return open(path, "w" + self._mode)
+        stream = open(path, 'wb')
+        stream = TextIOWrapper(stream) if mode == 't' else stream
+        return stream
 
     def ensure_exists(self, clear=False):
         """Ensure local directory exists

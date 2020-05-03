@@ -3,6 +3,7 @@ from .exceptions import UnserializableTypeError
 from .ext.simple import DefaultRegress
 from .fixture import RegressFixture
 from .impl.canonize_policies import AskCanonizePolicy, NoCanonizePolicy
+from .impl.serializer.binary_serializer import BinarySerializer
 from .impl.serializer.json_serializer import JsonSerializer
 from .impl.serializer.pickle_serializer import PickleSerializer
 from .impl.serializer.string_serializer import StringSerializer
@@ -22,6 +23,7 @@ __all__ = [
     'FileType',
 
     # Serializers
+    'BinarySerializer',
     'JsonSerializer',
     'PickleSerializer',
     'StringSerializer',

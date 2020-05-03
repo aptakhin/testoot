@@ -42,6 +42,34 @@ class RegressTestResult(ABC):
         pass  # pragma: no cover
 
 
+class RegressSerializer(ABC):
+    """Abstract serializer for objects canonization"""
+    def __init__(self, file_type_hint: FileType, mode: str = 'b'):
+        """Init
+
+        :param file_type_hint: hint for generating file or resource name
+        :param mode: hint for storage stream
+        """
+        self._file_type_hint = file_type_hint
+        self._mode = mode
+
+    @abstractmethod
+    def load(self, stream: IOBase) -> any:
+        pass  # pragma: no cover
+
+    @abstractmethod
+    def dump(self, obj: any, stream: IOBase):
+        pass  # pragma: no cover
+
+    @property
+    def file_type_hint(self) -> FileType:
+        return self._file_type_hint
+
+    @property
+    def mode(self):
+        return self._mode
+
+
 class RegressContext(ABC):
     """Abstract test context"""
     @abstractmethod
@@ -52,6 +80,10 @@ class RegressContext(ABC):
 
     @abstractmethod
     def get_storage_name_from_filename(self, filename: str):
+        pass  # pragma: no cover
+
+    @abstractmethod
+    def get_serializer(self) -> Optional[RegressSerializer]:
         pass  # pragma: no cover
 
     @abstractmethod
@@ -77,36 +109,14 @@ class CanonizePolicy(ABC):
         pass  # pragma: no cover
 
 
-class RegressSerializer(ABC):
-    """Abstract serializer for objects canonization"""
-    def __init__(self, file_type_hint: FileType):
-        """Init
-
-        :param file_type_hint: hint for generating file or resource name
-        """
-        self._file_type_hint = file_type_hint
-
-    @abstractmethod
-    def load(self, stream: IOBase) -> any:
-        pass  # pragma: no cover
-
-    @abstractmethod
-    def dump(self, obj: any, stream: IOBase):
-        pass  # pragma: no cover
-
-    @property
-    def file_type_hint(self) -> FileType:
-        return self._file_type_hint
-
-
 class RegressStorage(ABC):
     """Abstract storage for canonized data"""
     @abstractmethod
-    def open_read(self, key: str) -> Optional[IOBase]:
+    def open_read(self, key: str, mode: str) -> Optional[IOBase]:
         pass  # pragma: no cover
 
     @abstractmethod
-    def open_write(self, key: str) -> IOBase:
+    def open_write(self, key: str, mode: str) -> IOBase:
         pass  # pragma: no cover
 
 
