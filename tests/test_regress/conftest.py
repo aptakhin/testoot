@@ -12,7 +12,7 @@ class TestRegress(Regress):
     """Test regress"""
     def __init__(self):
         super().__init__(
-            storage=LocalDirectoryStorage('.regress/test', mode='t'),
+            storage=LocalDirectoryStorage('.regress/test'),
             serializer=JsonSerializer(),
             canonize_policy=AskCanonizePolicy(
                 ConstantUserInteraction(canonize=False),
@@ -32,5 +32,6 @@ def test_regress_instance():
 
 @pytest.fixture(scope='function')
 def test_regress(test_regress_instance, request):
-    fixture = RegressFixture(test_regress_instance, PytestContext(request))
+    fixture = RegressFixture(test_regress_instance,
+                             PytestContext(request, ask_canonize=True))
     yield fixture

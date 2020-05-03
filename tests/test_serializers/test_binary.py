@@ -1,15 +1,15 @@
-from io import BytesIO, TextIOWrapper
+from io import BytesIO
 
 import pytest
 
-from regress.pub import StringSerializer, UnserializableTypeError
+from regress.pub import BinarySerializer, UnserializableTypeError
 
 
 def test_simple():
-    serializer = StringSerializer()
+    serializer = BinarySerializer()
 
     out = BytesIO()
-    obj = 'abc'
+    obj = b'abc'
     serializer.dump(obj, out)
     out_bytes = out.getvalue()
     assert out_bytes == b'abc'
@@ -19,9 +19,8 @@ def test_simple():
     assert read_obj == obj
 
 
-def test_only_string():
-    serializer = StringSerializer()
-
+def test_only_binary():
+    serializer = BinarySerializer()
     out = BytesIO()
     obj = {'a': 1}
     with pytest.raises(UnserializableTypeError):

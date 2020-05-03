@@ -1,7 +1,7 @@
 from typing import Optional
 
 from regress.base import RegressContext, FileType, Comparator, \
-    RegressTestResult
+    RegressTestResult, RegressSerializer
 
 
 def _make_filename_from_pytest_nodeid(nodeid):
@@ -39,16 +39,21 @@ class PytestResult(RegressTestResult):
 class PytestContext(RegressContext):
     """Test context from Pytest"""
 
-    def __init__(self, request, comparator: Optional[Comparator] = None):
+    def __init__(self, request, comparator: Optional[Comparator] = None,
+                 serializer: Optional[RegressSerializer] = None,
+                 ask_canonize: bool = False):
         """Initializes pytest context
 
         :param request: standard request fixture
         :param comparator: comparison for objects
+        :param ask_canonize: ask canonize
         """
         self._request = request
         self._nodeid = request.node.nodeid
         self._comparator = (PytestComparator() if comparator is None
                             else comparator)
+        self._serializer = serializer
+        self._ask_canonize = ask_canonize
 
     def get_storage_name(self, file_type_hint: FileType,
                          suffix: Optional[str] = None):
@@ -68,12 +73,16 @@ class PytestContext(RegressContext):
     def get_comparator(self) -> Optional[Comparator]:
         return self._comparator
 
+    def get_serializer(self) -> Optional[RegressSerializer]:
+        return self._serializer
+
     def ask_canonize(self) -> bool:
         """Checks that context allow canonization with user interaction.
-        :func:`register_addoption` had to be called
-        in `conftest.py` to support `--canonize` parameter in pytest running.
+        :func:`register_addoption` had to be called in `conftest.py` to support
+        `--canonize` parameter in pytest running.
         """
-        return self._request.config.getoption("--canonize")
+        return (self._request.config.getoption("--canonize")
+                or self._ask_canonize)
 
     def create_test_result(self, test_obj: any, canon_obj: any,
                            exc: Exception) -> RegressTestResult:
