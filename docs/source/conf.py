@@ -60,7 +60,7 @@ html_static_path = ['_static']
 
 master_doc = 'index'
 
-autoclass_content = 'both'
+autoclass_content = 'class'
 
 autodoc_default_options = {
     'special-members': '__init__',

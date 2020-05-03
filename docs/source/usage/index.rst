@@ -1,12 +1,9 @@
-Api
+Usage
 ===================================
 
 .. toctree::
    :maxdepth: 1
    :caption: Contents:
 
-   regress
-   storage
-   serializer
-   canonize_policy
-   pytest
+   quickstart
+   basics

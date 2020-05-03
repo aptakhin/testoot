@@ -11,7 +11,7 @@ class ConsoleTestRegress(Regress):
     """Test regress"""
     def __init__(self):
         super().__init__(
-            storage=LocalDirectoryStorage('.regress', mode='t'),
+            storage=LocalDirectoryStorage('.regress/console', mode='t'),
             serializer=JsonSerializer(),
             canonize_policy=AskCanonizePolicy(ConsoleUserInteraction()),
         )
@@ -33,13 +33,13 @@ def console_regress(console_regress_instance, request):
     yield fixture
 
 
-@pytest.mark.skip
+@pytest.mark.console
 def test_simple(console_regress: RegressFixture):
     result = {'a': 1}
     console_regress.test(result)  # Commit
 
-    result3 = {'a': 2}  # Try commit change
-    console_regress.test(result3)
+    result2 = {'a': 2}  # Try commit change
+    console_regress.test(result2)
 
 
 if __name__ == '__main__':
