@@ -26,13 +26,16 @@ Pytest configuration is the quite simple::
 
     import pytest
 
-    from regress.ext.pytest import PytestContext
-    from regress.ext.simple import LocalRegress
+    from regress.ext.pytest import PytestContext, register_addoption
+    from regress.ext.simple import DefaultRegress
     from regress.fixture import RegressFixture
+
+    def pytest_addoption(parser):
+        register_addoption(parser)
 
     @pytest.fixture(scope='module')
     def regress_instance():
-        regress = LocalRegress()
+        regress = DefaultRegress()
         regress.ensure_exists(clear=True)
         yield regress
 
@@ -43,21 +46,25 @@ Pytest configuration is the quite simple::
         yield fixture
 
 
-LocalRegress is the configured class::
+DefaultRegress is the configured class::
 
     from regress.pub import NoCanonizePolicy, PickleSerializer, \
         LocalDirectoryStorage, Regress
 
-    class LocalRegress(Regress):
+    class DefaultRegress(Regress):
         def __init__(self):
             super().__init__(
                 storage=LocalDirectoryStorage('.regress'),
                 serializer=PickleSerializer(),
-                canonize_policy=NoCanonizePolicy(),
+                canonize_policy=AskCanonizePolicy(ConsoleUserInteraction())),
             )
 
 It uses local filesystem storage in `.regress` directory in `storage` parameter.
 
-All objects are dumped with pickle `serializer` :py:class:`.regress.pub.PickleSerializer`, which is supports almost all Python objects, but has only binary representantion in files. It'll be difficult to merge binary changes in the favourite VCS without running code. Also you can find other types in `Serializers <../api/serializer.html>`__.
+All objects are dumped with pickle `serializer` :py:class:`.regress.pub.PickleSerializer`, which is supports almost all Python objects, but has only binary representantion in files. It'll be difficult to merge binary changes in the favourite VCS without running code. You can find other serializers in `Serializers <../api/serializer.html>`__ page.
 
-And third `canonize_policy` option shows running tests behavior when we met result test conflict. :py:class:`.regress.pub.NoCanonizePolicy` raises an error in assert. :py:class:`.regress.pub.AskCanonizePolicy` can ask user approval for canonizing new behaviour or skipping it later and raising an error in assert then. Latter can't be used in automated tests, but is useful in manual runs.
+Parameter `canonize_policy` controls behavior when we met result test conflict:
+
+- :py:class:`.regress.pub.AskCanonizePolicy` (default) with `--canonize` pytest flag asks user approval for canonizing. If user refuses it skips for later and raises an error in assert then. For supporing `--canonize` flag :py:func:`.regress.ext.pytest.register_addoption` have to be called in `conftest.py`.
+
+- :py:class:`.regress.pub.NoCanonizePolicy` always raises an error in assert.

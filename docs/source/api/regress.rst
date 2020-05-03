@@ -6,6 +6,9 @@ Regress is the main logic class for testing. It's configured by storage, seriali
 .. autoclass:: regress.pub.Regress
   :members:
 
+.. autoclass:: regress.pub.DefaultRegress
+  :members:
+
 Fixture is the helper class which incapsulates current Regress and test context state
 
 .. automodule:: regress.fixture

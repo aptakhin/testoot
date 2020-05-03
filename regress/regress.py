@@ -5,7 +5,7 @@ from regress.base import RegressStorage, RegressSerializer, \
 
 
 class Regress:
-    """Main regression management object. Can test data."""
+    """Main regression management object. Can test and canonize data."""
 
     def __init__(self, storage: RegressStorage, serializer: RegressSerializer,
                  canonize_policy: CanonizePolicy,
@@ -14,8 +14,17 @@ class Regress:
 
         :param storage: storage instance
         :param serializer: serializer instance
-        :param canonize_policy: canonize policy instance
-        :param comparator: base comparator
+        :param canonize_policy: controls behavior when we met result
+               test conflict.
+
+               - :py:class:`.regress.pub.NoCanonizePolicy` always raises
+                 an error in assert.
+               - :py:class:`.regress.pub.AskCanonizePolicy`
+                 with `--canonize` pytest flag asks user approval for
+                 canonizing. If user refuses it skips for later and raises
+                 an error in assert then.
+
+        :param comparator: optional parameter
         """
         self._storage: RegressStorage = storage
         self._serializer: RegressSerializer = serializer
@@ -95,6 +104,7 @@ class Regress:
         """
         with self._storage.open_write(storage_name) as wstream:
             self._serializer.dump(obj, wstream)
+            wstream.close()
 
     def _do_test(self, *, test_obj: any, canon_obj: any,
                  storage_name: str, context: RegressContext,
@@ -107,10 +117,18 @@ class Regress:
         try:
             comparator.compare(test_obj, canon_obj)
         except Exception as e:
-            do_canonize = self._canonize_policy.ask_canonize(
-                context, exc=e,
+            test_result = context.create_test_result(test_obj=test_obj,
+                                                     canon_obj=canon_obj,
+                                                     exc=e)
+
+            # TODO: refactor this strange logic
+            # Asks query parameters to canonize and check it again
+            do_user_canonize = context.ask_canonize()
+            do_auto_canonize = self._canonize_policy.ask_canonize(
+                test_result=test_result,
             )
-            if not do_canonize:
+
+            if not (do_user_canonize or do_auto_canonize):
                 raise
 
             return self._canonize(test_obj, storage_name=storage_name)
@@ -127,3 +145,12 @@ class Regress:
                 raise RuntimeError('No comparator given in pipeline!')
 
         return comparator
+
+    def _get_canonize_policy(self, canonize_policy: Optional[CanonizePolicy] =
+                             None) -> CanonizePolicy:
+        if canonize_policy is None:
+            from regress.impl.canonize_policies import AskCanonizePolicy
+            from regress.impl.user_interactions import ConsoleUserInteraction
+            canonize_policy = AskCanonizePolicy(ConsoleUserInteraction())
+
+        return canonize_policy

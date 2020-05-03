@@ -1,5 +1,6 @@
-from .base import FileType
+from .base import FileType, RegressContext
 from .exceptions import UnserializableTypeError
+from .ext.simple import DefaultRegress
 from .fixture import RegressFixture
 from .impl.canonize_policies import AskCanonizePolicy, NoCanonizePolicy
 from .impl.serializer.json_serializer import JsonSerializer
@@ -13,7 +14,9 @@ from .regress import Regress
 __all__ = [
     # Root
     'Regress',
+    'RegressContext',
     'RegressFixture',
+    'DefaultRegress',
 
     # Misc
     'FileType',
