@@ -52,6 +52,10 @@ Making virtualenv with development requirements:
     venv/bin/pytest -s tests
     venv/bin/flake8 regress --show-source --statistics
     venv/bin/pytest --cov=regress --cov-report html
+    
+Some tests uses console for user interaction. Add `--console` flag:
+
+    venv/bin/pytest -s tests --console
 
 ### Building docs
 

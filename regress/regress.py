@@ -19,7 +19,8 @@ class Regress:
         """
         self._storage: RegressStorage = storage
         self._serializer: RegressSerializer = serializer
-        self._canonize_policy: CanonizePolicy = canonize_policy
+        self._canonize_policy: CanonizePolicy = self._get_canonize_policy(
+            canonize_policy)
         self._comparator: Comparator = comparator
 
     def test(self, obj: any, context: RegressContext,
@@ -108,16 +109,18 @@ class Regress:
         try:
             comparator.compare(test_obj, canon_obj)
         except Exception as e:
-            do_canonize = context.ask_canonize()
-
             test_result = context.create_test_result(test_obj=test_obj,
                                                      canon_obj=canon_obj,
                                                      exc=e)
 
+            # TODO: refactor this strange logic
+            # Asks query parameters to canonize and check it again
+            do_canonize = context.ask_canonize()
             if do_canonize:
                 do_canonize = self._canonize_policy.ask_canonize(
                     test_result=test_result,
                 )
+
             if not do_canonize:
                 raise
 
@@ -135,3 +138,12 @@ class Regress:
                 raise RuntimeError('No comparator given in pipeline!')
 
         return comparator
+
+    def _get_canonize_policy(self, canonize_policy:
+            Optional[CanonizePolicy] = None) -> CanonizePolicy:
+        if canonize_policy is None:
+            from regress.impl.canonize_policies import AskCanonizePolicy
+            from regress.impl.user_interactions import ConsoleUserInteraction
+            canonize_policy = AskCanonizePolicy(ConsoleUserInteraction())
+
+        return canonize_policy
