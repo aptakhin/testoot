@@ -9,3 +9,4 @@ Api
    storage
    serializer
    canonize_policy
+   pytest

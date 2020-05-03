@@ -5,22 +5,30 @@ from regress.base import RegressStorage, RegressSerializer, \
 
 
 class Regress:
-    """Main regression management object. Can test data."""
+    """Main regression management object. Can test and canonize data."""
 
     def __init__(self, storage: RegressStorage, serializer: RegressSerializer,
-                 canonize_policy: Optional[CanonizePolicy] = None,
+                 canonize_policy: CanonizePolicy,
                  comparator: Optional[Comparator] = None):
         """Constructor
 
         :param storage: storage instance
         :param serializer: serializer instance
-        :param canonize_policy: canonize policy instance
-        :param comparator: base comparator
+        :param canonize_policy: controls behavior when we met result
+               test conflict.
+
+               - :py:class:`.regress.pub.NoCanonizePolicy` always raises
+                 an error in assert.
+               - :py:class:`.regress.pub.AskCanonizePolicy`
+                 with `--canonize` pytest flag asks user approval for
+                 canonizing. If user refuses it skips for later and raises
+                 an error in assert then.
+
+        :param comparator: optional parameter
         """
         self._storage: RegressStorage = storage
         self._serializer: RegressSerializer = serializer
-        self._canonize_policy: CanonizePolicy = self._get_canonize_policy(
-            canonize_policy)
+        self._canonize_policy: CanonizePolicy = canonize_policy
         self._comparator: Comparator = comparator
 
     def test(self, obj: any, context: RegressContext,
@@ -139,8 +147,8 @@ class Regress:
 
         return comparator
 
-    def _get_canonize_policy(self, canonize_policy:
-            Optional[CanonizePolicy] = None) -> CanonizePolicy:
+    def _get_canonize_policy(self, canonize_policy: Optional[CanonizePolicy] =
+                             None) -> CanonizePolicy:
         if canonize_policy is None:
             from regress.impl.canonize_policies import AskCanonizePolicy
             from regress.impl.user_interactions import ConsoleUserInteraction

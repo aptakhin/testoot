@@ -20,6 +20,7 @@ class PytestComparator(Comparator):
 
 
 class PytestResult(RegressTestResult):
+    """Pytest test result"""
     def __init__(self, *, test_obj: any, canon_obj: any, exc: Exception,
                  context: 'PytestContext'):
         self._test_obj = test_obj
@@ -36,7 +37,7 @@ class PytestResult(RegressTestResult):
 
 
 class PytestContext(RegressContext):
-    """Context from Pytest"""
+    """Test context from Pytest"""
 
     def __init__(self, request, comparator: Optional[Comparator] = None):
         """Initializes pytest context
@@ -68,6 +69,10 @@ class PytestContext(RegressContext):
         return self._comparator
 
     def ask_canonize(self) -> bool:
+        """Checks that context allow canonization with user interaction.
+        :func:`register_addoption` had to be called
+        in `conftest.py` to support `--canonize` parameter in pytest running.
+        """
         return self._request.config.getoption("--canonize")
 
     def create_test_result(self, test_obj: any, canon_obj: any,
@@ -77,6 +82,15 @@ class PytestContext(RegressContext):
 
 
 def register_addoption(parser):
-    """ Register this function in conftest to enable canonize parameter """
+    """ Call this function in `conftest.py` to enable canonize online
+    such way:
+
+    .. highlight:: python
+    .. code-block:: python
+
+        def pytest_addoption(parser):
+            register_addoption(parser)
+
+    """
     parser.addoption('--canonize', action='store_true', help='Do canonization '
                                                              'online')

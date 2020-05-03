@@ -2,6 +2,7 @@ from regress.base import RegressTestResult, CanonizePolicy, UserInteraction
 
 
 class AskCanonizePolicy(CanonizePolicy):
+    """"""
     def __init__(self, user_interaction: UserInteraction):
         self._user_interaction = user_interaction
 
