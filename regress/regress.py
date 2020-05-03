@@ -123,13 +123,12 @@ class Regress:
 
             # TODO: refactor this strange logic
             # Asks query parameters to canonize and check it again
-            do_canonize = context.ask_canonize()
-            if do_canonize:
-                do_canonize = self._canonize_policy.ask_canonize(
-                    test_result=test_result,
-                )
+            do_user_canonize = context.ask_canonize()
+            do_auto_canonize = self._canonize_policy.ask_canonize(
+                test_result=test_result,
+            )
 
-            if not do_canonize:
+            if not (do_user_canonize or do_auto_canonize):
                 raise
 
             return self._canonize(test_obj, storage_name=storage_name)
