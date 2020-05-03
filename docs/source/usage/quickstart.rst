@@ -17,10 +17,10 @@ Pytest configuration is the quite simple:
    :start-after: # region: header
    :end-before: # endregion: header
 
-DefaultRegress is the configured class::
+Basically DefaultRegress is the configured class::
 
-    from regress.pub import NoCanonizePolicy, PickleSerializer, \
-        LocalDirectoryStorage, DefaultRegress
+    from regress.pub import Regress, AskCanonizePolicy, PickleSerializer, \
+        LocalDirectoryStorage, DefaultRegress, ConsoleUserInteraction
 
     class DefaultRegress(Regress):
         def __init__(self):
