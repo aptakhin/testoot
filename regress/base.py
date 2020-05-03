@@ -34,6 +34,14 @@ class Comparator(ABC):
         pass  # pragma: no cover
 
 
+class RegressTestResult(ABC):
+    """Abstract test result"""
+    @abstractmethod
+    def format_diff(self) -> str:
+        """Format diff"""
+        pass  # pragma: no cover
+
+
 class RegressContext(ABC):
     """Abstract test context"""
     @abstractmethod
@@ -50,11 +58,20 @@ class RegressContext(ABC):
     def get_comparator(self) -> Optional[Comparator]:
         pass  # pragma: no cover
 
+    @abstractmethod
+    def ask_canonize(self) -> bool:
+        pass  # pragma: no cover
+
+    @abstractmethod
+    def create_test_result(self, test_obj: any, canon_obj: any,
+                           exc: Exception) -> RegressTestResult:
+        pass  # pragma: no cover
+
 
 class CanonizePolicy(ABC):
     """Abstract run decisions with conflicted tests"""
     @abstractmethod
-    def ask_canonize(self, context: RegressContext, exc: Exception) -> bool:
+    def ask_canonize(self, test_result: RegressTestResult) -> bool:
         """Asks user for canonization or decide it by internal tests
         policies"""
         pass  # pragma: no cover
@@ -96,6 +113,6 @@ class RegressStorage(ABC):
 class UserInteraction(ABC):
     """Abstract interaction with user"""
     @abstractmethod
-    def ask_canonize(self, context: RegressContext, exc: Exception) -> bool:
+    def ask_canonize(self, test_result: RegressTestResult) -> bool:
         """Asks user for canonization"""
         pass  # pragma: no cover

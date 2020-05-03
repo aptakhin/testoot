@@ -8,7 +8,7 @@ class Regress:
     """Main regression management object. Can test data."""
 
     def __init__(self, storage: RegressStorage, serializer: RegressSerializer,
-                 canonize_policy: CanonizePolicy,
+                 canonize_policy: Optional[CanonizePolicy] = None,
                  comparator: Optional[Comparator] = None):
         """Constructor
 
@@ -93,6 +93,7 @@ class Regress:
 
         :return:
         """
+        print("WW", storage_name, obj)
         with self._storage.open_write(storage_name) as wstream:
             self._serializer.dump(obj, wstream)
 
@@ -107,13 +108,26 @@ class Regress:
         try:
             comparator.compare(test_obj, canon_obj)
         except Exception as e:
-            do_canonize = self._canonize_policy.ask_canonize(
-                context, exc=e,
-            )
+            do_canonize = context.ask_canonize()
+
+            test_result = context.create_test_result(test_obj=test_obj,
+                                                     canon_obj=canon_obj,
+                                                     exc=e)
+
+            if do_canonize:
+                do_canonize = self._canonize_policy.ask_canonize(
+                    test_result=test_result,
+                )
             if not do_canonize:
                 raise
 
-            return self._canonize(test_obj, storage_name=storage_name)
+            print("D", test_obj, storage_name)
+            x = self._canonize(test_obj, storage_name=storage_name)
+
+            with self._storage.open_read(storage_name) as fstream:
+                d = self._serializer.load(fstream)
+                print('xx', d)
+
 
     def _get_comparator(self, context: RegressContext,
                         comparator: Optional[Comparator] = None) -> Comparator:

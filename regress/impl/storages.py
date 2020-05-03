@@ -36,6 +36,7 @@ class LocalDirectoryStorage(RegressStorage):
 
     def open_write(self, key: str) -> IOBase:
         path = self._get_path(key)
+        print("WWf", path)
         return open(path, "w" + self._mode)
 
     def ensure_exists(self, clear=False):
