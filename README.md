@@ -59,9 +59,3 @@ Using `sphinx`:
 
     cd docs
     make
-
-## Further plans
-
-- Canonization tool with merging tests renames
-- Remote canonization data storages for not storing data in the repository
-- Support for other Python test frameworks
