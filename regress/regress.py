@@ -93,9 +93,9 @@ class Regress:
 
         :return:
         """
-        print("WW", storage_name, obj)
         with self._storage.open_write(storage_name) as wstream:
             self._serializer.dump(obj, wstream)
+            wstream.close()
 
     def _do_test(self, *, test_obj: any, canon_obj: any,
                  storage_name: str, context: RegressContext,
@@ -121,13 +121,7 @@ class Regress:
             if not do_canonize:
                 raise
 
-            print("D", test_obj, storage_name)
-            x = self._canonize(test_obj, storage_name=storage_name)
-
-            with self._storage.open_read(storage_name) as fstream:
-                d = self._serializer.load(fstream)
-                print('xx', d)
-
+            return self._canonize(test_obj, storage_name=storage_name)
 
     def _get_comparator(self, context: RegressContext,
                         comparator: Optional[Comparator] = None) -> Comparator:

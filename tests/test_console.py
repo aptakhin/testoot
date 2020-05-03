@@ -11,7 +11,7 @@ class ConsoleTestRegress(Regress):
     """Test regress"""
     def __init__(self):
         super().__init__(
-            storage=LocalDirectoryStorage('.regress', mode='t'),
+            storage=LocalDirectoryStorage('.regress/console', mode='t'),
             serializer=JsonSerializer(),
             canonize_policy=AskCanonizePolicy(ConsoleUserInteraction()),
         )

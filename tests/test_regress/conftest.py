@@ -12,7 +12,7 @@ class TestRegress(Regress):
     """Test regress"""
     def __init__(self):
         super().__init__(
-            storage=LocalDirectoryStorage('.regress', mode='t'),
+            storage=LocalDirectoryStorage('.regress/test', mode='t'),
             serializer=JsonSerializer(),
             canonize_policy=AskCanonizePolicy(
                 ConstantUserInteraction(canonize=False),

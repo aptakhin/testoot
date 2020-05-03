@@ -1,6 +1,7 @@
 from typing import Optional
 
-from regress.base import RegressContext, FileType, Comparator, RegressTestResult
+from regress.base import RegressContext, FileType, Comparator, \
+    RegressTestResult
 
 
 def _make_filename_from_pytest_nodeid(nodeid):
