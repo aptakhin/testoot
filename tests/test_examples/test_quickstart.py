@@ -24,7 +24,7 @@ def regress(regress_instance, request):
     yield fixture
 # endregion: header
 
-@pytest.mark.no_console  # Here for not including to docs page
+@pytest.mark.no_canonize  # Here for not including to docs page
 # region: test_simple
 # regress is the helper fixture easy to setup
 def test_simple(regress: RegressFixture):

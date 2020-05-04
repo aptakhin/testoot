@@ -3,7 +3,7 @@ import pytest
 from regress.fixture import RegressFixture
 
 
-@pytest.mark.console
+@pytest.mark.canonize
 def test_simple(regress: RegressFixture):
     result = {'a': 1}
     regress.test(result)  # Commit

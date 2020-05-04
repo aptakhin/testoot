@@ -53,9 +53,9 @@ Making virtualenv with development requirements:
     venv/bin/flake8 regress --show-source --statistics
     venv/bin/pytest --cov=regress --cov-report html
 
-Some tests uses console for user interaction. Add `--console` flag:
+Some tests uses console for user interaction. Add `--canonize` flag:
 
-    venv/bin/pytest -s tests --console
+    venv/bin/pytest -s tests --canonize
 
 ### Building docs
 
