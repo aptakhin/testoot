@@ -33,7 +33,9 @@ class PytestResult(RegressTestResult):
         from _pytest.assertion import util
         compare_result = util._reprcompare('==', self._test_obj,
                                            self._canon_obj)
-        return f'{compare_result}'
+        verbose = self._context._request.config.getoption('verbose') > 0
+        add_test_name = '' if verbose else f'[{self._context._nodeid}]\n'
+        return f'{add_test_name}{compare_result}'
 
 
 class PytestContext(RegressContext):
@@ -91,7 +93,7 @@ class PytestContext(RegressContext):
 
 
 def register_addoption(parser):
-    """ Call this function in `conftest.py` to enable canonize online
+    """Call this function in `conftest.py` to enable canonize online
     such way:
 
     .. highlight:: python

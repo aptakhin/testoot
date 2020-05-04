@@ -5,17 +5,17 @@
 [![Documentation Status](https://readthedocs.org/projects/regress/badge/?version=latest)](https://regress.readthedocs.io/en/latest/?badge=latest)
 [![Maintainability](https://api.codeclimate.com/v1/badges/4bab5c99811799725609/maintainability)](https://codeclimate.com/github/aptakhin/regress/maintainability)
 
-Early draft for regression testing framework in Python 3.4+. Regression testing is useful in unit and module testing when rewriting test data creating is too boring. After you canonized the ideal output result all tests will pass until the data changes moment.
+Regression testing framework for Python 3.4+. It's useful in unit and module testing when creating or rewriting test data is too boring. After you canonized the ideal output result all tests will pass until the data changes moment.
 
 - Writes data to the local filesystem storage
-- Supports text, json and picklable objects
-- Have different policies for running and resolving test conflicts
+- Supports binary, text, json and picklable objects
+- Different policies for resolving test conflicts
 
 Currently integrates best with the PyTest, but other frameworks are also welcomed.
 
 ## Example
 
-One pytest function is the scope of the result. Newly calculated data compares with the original saved result.
+One pytest function is the scope of the result. Newly calculated data compares with the original canonized result.
 
     # regress is the function scope helper fixture easy to setup
     def test_simple(regress: RegressFixture):
@@ -53,9 +53,9 @@ Making virtualenv with development requirements:
     venv/bin/flake8 regress --show-source --statistics
     venv/bin/pytest --cov=regress --cov-report html
 
-Some tests uses console for user interaction. Add `--console` flag:
+Some tests uses console for user interaction. Add `--canonize` flag:
 
-    venv/bin/pytest -s tests --console
+    venv/bin/pytest -s tests --canonize
 
 ### Building docs
 

@@ -27,23 +27,24 @@ def pytest_addoption(parser):
 def pytest_configure(config):
     # register an additional marker
     config.addinivalue_line(
-        'markers', 'console(name): mark test to run only with --console'
+        'markers', 'canonize(name): mark test to run only with --canonize'
     )
     config.addinivalue_line(
-        'markers', 'no_console(name): mark test not to run only with --console'
+        'markers', 'no_canonize(name): mark test not to run only with '
+        '--canonize'
     )
 
 
 def pytest_runtest_setup(item):
     # Skip tests marked with console without --console option
-    if any(mark for mark in item.iter_markers(name='console')):
-        if not item.config.getoption('--console'):
-            pytest.skip('test requires --console flag')
+    if any(mark for mark in item.iter_markers(name='canonize')):
+        if not item.config.getoption('--canonize'):
+            pytest.skip('test requires --canonize flag')
 
     # Skip tests marked with no_console with --console option
-    if any(mark for mark in item.iter_markers(name='no_console')):
-        if item.config.getoption('--console'):
-            pytest.skip('test no --console flag')
+    if any(mark for mark in item.iter_markers(name='no_canonize')):
+        if item.config.getoption('--canonize'):
+            pytest.skip('test no --canonize flag')
 
 
 class TestRegress(Regress):
