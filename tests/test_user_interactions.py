@@ -16,6 +16,7 @@ def test_console_parse():
 def test_console():
     test_result = AbcDiffResult()
     ui = ConsoleUserInteraction()
+    ui.show_diff = MagicMock(return_value='')
 
     ui._ask_user_canonize = MagicMock(return_value='y')
     assert ui.ask_canonize(test_result)
