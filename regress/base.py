@@ -119,6 +119,18 @@ class RegressStorage(ABC):
     def open_write(self, key: str, mode: str) -> IOBase:
         pass  # pragma: no cover
 
+    @abstractmethod
+    def ensure_exists(self):
+        pass  # pragma: no cover
+
+    @abstractmethod
+    def clear_if_exists(self):
+        pass  # pragma: no cover
+
+    @abstractmethod
+    def clone(self, *, add_path: Optional[str] = None):
+        pass  # pragma: no cover
+
 
 class UserInteraction(ABC):
     """Abstract interaction with user"""

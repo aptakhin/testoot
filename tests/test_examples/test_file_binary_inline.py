@@ -1,15 +1,15 @@
 from pathlib import Path
 
-from regress.fixture import RegressFixture
-from regress.pub import BinarySerializer
+from regress.regress import Regress
+from regress.serializers import BinarySerializer
 
 
 def generate_file():
-    filename = Path('.regress/console/generated_file_inline.txt')
+    filename = Path('.regress/examples/generated_file_inline.txt')
     filename.write_bytes(b'abc')
     return filename
 
 
-def test_file(binary_regress: RegressFixture):
-    binary_regress.test_filename(generate_file(),
-                                 serializer=BinarySerializer())
+def test_file(regress: Regress):
+    regress.test_filename(generate_file(),
+                          serializer=BinarySerializer())

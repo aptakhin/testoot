@@ -1,23 +1,21 @@
 from .base import FileType, RegressContext
+from .base_regress import BaseRegress
 from .exceptions import UnserializableTypeError
-from .ext.simple import DefaultRegress
-from .fixture import RegressFixture
-from .impl.canonize_policies import AskCanonizePolicy, NoCanonizePolicy
-from .impl.serializer.binary_serializer import BinarySerializer
-from .impl.serializer.json_serializer import JsonSerializer
-from .impl.serializer.pickle_serializer import PickleSerializer
-from .impl.serializer.string_serializer import StringSerializer
-from .impl.storages import LocalDirectoryStorage
-from .impl.user_interactions import ConsoleUserInteraction, \
-    ConstantUserInteraction
+from .ext.simple import DefaultBaseRegress
+from .policies import AskCanonizePolicy, NoCanonizePolicy
 from .regress import Regress
+from .serializers import BinarySerializer, JsonSerializer, StringSerializer, \
+    PickleSerializer
+from .storages import LocalDirectoryStorage
+from .user_interactions import ConsoleUserInteraction, \
+    ConstantUserInteraction
 
 __all__ = [
     # Root
-    'Regress',
+    'BaseRegress',
     'RegressContext',
-    'RegressFixture',
-    'DefaultRegress',
+    'Regress',
+    'DefaultBaseRegress',
 
     # Misc
     'FileType',
@@ -25,8 +23,8 @@ __all__ = [
     # Serializers
     'BinarySerializer',
     'JsonSerializer',
-    'PickleSerializer',
     'StringSerializer',
+    'PickleSerializer',
 
     # Policies
     'NoCanonizePolicy',

@@ -1,6 +1,6 @@
 import pytest
 
-from regress.impl.storages import LocalDirectoryStorage
+from regress.storages import LocalDirectoryStorage
 
 
 def test_root_clear_exception():

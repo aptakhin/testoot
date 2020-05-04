@@ -2,11 +2,11 @@ from typing import Optional
 
 from regress.base import RegressStorage, RegressSerializer, Comparator, \
     CanonizePolicy
-from regress.regress import Regress
+from regress.base_regress import BaseRegress
 
 
-class DefaultRegress(Regress):
-    """Default configured Regress. Stores files in .regress folder
+class DefaultBaseRegress(BaseRegress):
+    """Default configured BaseRegress. Stores files in .regress folder
     with pickle serializer and throws errors on conflict output"""
     def __init__(self, *, storage: Optional[RegressStorage] = None,
                  serializer: Optional[RegressSerializer] = None,
@@ -24,9 +24,9 @@ class DefaultRegress(Regress):
                :class:`RegressContext`.
         """
 
-        from regress.pub import PickleSerializer, \
-            LocalDirectoryStorage, AskCanonizePolicy, \
+        from regress.pub import LocalDirectoryStorage, AskCanonizePolicy, \
             ConsoleUserInteraction
+        from regress.serializers import PickleSerializer
 
         super().__init__(
             storage=storage or LocalDirectoryStorage('.regress'),
@@ -35,6 +35,3 @@ class DefaultRegress(Regress):
                              AskCanonizePolicy(ConsoleUserInteraction())),
             comparator=comparator,
         )
-
-    def ensure_exists(self, clear=False):
-        return self._storage.ensure_exists(clear=clear)
