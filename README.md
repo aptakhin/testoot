@@ -52,6 +52,12 @@ Making virtualenv with development requirements:
     venv/bin/pytest -s tests
     venv/bin/flake8 regress --show-source --statistics
     venv/bin/pytest --cov=regress --cov-report html
+    
+Or for automatizing:
+    
+    cp TEST.sh.example TEST.sh
+    chmod +x TEST.sh
+    ./TEST.sh
 
 Some tests uses console for user interaction. Add `--canonize` flag:
 

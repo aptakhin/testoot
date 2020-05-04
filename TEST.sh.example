@@ -1,0 +1,3 @@
+venv/bin/pytest -s tests
+venv/bin/flake8 regress --show-source --statistics
+venv/bin/pytest --cov=regress --cov-report html

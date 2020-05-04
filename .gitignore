@@ -4,6 +4,9 @@ docs/build/
 # Regress generated
 .regress/
 
+# Test
+TEST.sh
+
 # Coverages
 .coverage
 coverage.xml
