@@ -13,7 +13,7 @@ def pytest_addoption(parser):
 @pytest.fixture(scope='module')
 def regress_instance():
     regress = DefaultRegress()
-    regress.ensure_exists(clear=True)
+    regress.ensure_exists()
     yield regress
 
 
@@ -24,7 +24,7 @@ def regress(regress_instance, request):
     yield fixture
 # endregion: header
 
-@pytest.mark.no_console
+@pytest.mark.no_console  # Here for not including to docs page
 # region: test_simple
 # regress is the helper fixture easy to setup
 def test_simple(regress: RegressFixture):

@@ -21,7 +21,6 @@ def test_simple():
 
 def test_only_string():
     serializer = StringSerializer()
-
     out = BytesIO()
     obj = {'a': 1}
     with pytest.raises(UnserializableTypeError):
