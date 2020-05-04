@@ -41,16 +41,26 @@ class LocalDirectoryStorage(RegressStorage):
         stream = TextIOWrapper(stream) if mode == 't' else stream
         return stream
 
-    def ensure_exists(self, clear=False):
-        """Ensure local directory exists
-
-        :param clear: remove whole folder if exists
+    def ensure_exists(self):
+        """Ensure local directory exists or create it
         :return:
         """
-        if clear and self._root_dir.exists():
+        self._root_dir.mkdir(parents=True, exist_ok=True)
+
+    def clear_if_exists(self):
+        """Clear storage if exists
+        :return:
+        """
+        if self._root_dir.exists():
             shutil.rmtree(self._root_dir)
 
-        self._root_dir.mkdir(parents=True, exist_ok=True)
+    def clone(self, *, add_path: Optional[str] = None):
+        path = self._root_dir / add_path if add_path else self._root_dir
+        return type(self)(path)
+
+    @property
+    def root_dir(self):
+        return self._root_dir
 
     def _get_path(self, key: str):
         return self._root_dir / key

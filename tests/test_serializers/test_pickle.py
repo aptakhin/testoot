@@ -2,7 +2,7 @@ from io import BytesIO
 
 import pytest
 
-from regress.pub import PickleSerializer
+from regress.serializers import PickleSerializer
 
 
 def test_simple():

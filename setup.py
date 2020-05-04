@@ -14,8 +14,6 @@ setup(
     packages=[
         "regress",
         "regress.ext",
-        "regress.impl",
-        "regress.impl.serializer",
     ],
     author="Alexander Ptakhin",
     author_email="me@aptakhin.name",

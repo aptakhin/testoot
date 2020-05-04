@@ -1,10 +1,10 @@
 import pytest
 
-from regress.fixture import RegressFixture
+from regress.regress import Regress
 
 
 @pytest.mark.canonize
-def test_simple(regress: RegressFixture):
+def test_simple(regress: Regress):
     result = {'a': 1}
     regress.test(result)  # Commit
 

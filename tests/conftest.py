@@ -2,10 +2,11 @@ import pytest
 
 from regress.ext.pytest import register_addoption, \
     PytestContext
-from regress.fixture import RegressFixture
-from regress.pub import AskCanonizePolicy, PickleSerializer, \
-    LocalDirectoryStorage, ConsoleUserInteraction, BinarySerializer
+from regress.ext.simple import DefaultBaseRegress
+from regress.pub import AskCanonizePolicy, LocalDirectoryStorage, \
+    ConsoleUserInteraction
 from regress.regress import Regress
+from regress.serializers import BinarySerializer, PickleSerializer
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
@@ -47,34 +48,26 @@ def pytest_runtest_setup(item):
             pytest.skip('test no --canonize flag')
 
 
-class TestRegress(Regress):
-    """Test regress"""
-    def __init__(self):
-        super().__init__(
-            storage=LocalDirectoryStorage('.regress/console'),
-            serializer=PickleSerializer(),
-            canonize_policy=AskCanonizePolicy(ConsoleUserInteraction()),
-        )
-
-    def ensure_exists(self, clear=False):
-        return self._storage.ensure_exists(clear=clear)
-
-
 @pytest.fixture(scope='module')
-def regress_instance():
-    regress = TestRegress()
-    regress.ensure_exists(clear=True)
+def root_base_regress():
+    regress = DefaultBaseRegress(
+        storage=LocalDirectoryStorage('.regress'),
+        serializer=PickleSerializer(),
+        canonize_policy=AskCanonizePolicy(ConsoleUserInteraction()),
+    )
+    regress.storage.clear_if_exists()
+    regress.storage.ensure_exists()
     yield regress
 
 
 @pytest.fixture(scope='function')
-def regress(regress_instance, request):
-    fixture = RegressFixture(regress_instance, PytestContext(request))
+def root_regress(root_base_regress, request):
+    fixture = Regress(root_base_regress, PytestContext(request))
     yield fixture
 
 
-@pytest.fixture(scope='function')
-def binary_regress(regress_instance, request):
-    fixture = RegressFixture(regress_instance, PytestContext(request,
-                             serializer=BinarySerializer()))
-    yield fixture
+# @pytest.fixture(scope='function')
+# def binary_regress(regress_instance, request):
+#     fixture = Regress(regress_instance,
+#                       PytestContext(request, serializer=BinarySerializer()))
+#     yield fixture

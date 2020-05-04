@@ -6,7 +6,7 @@ Api
    :caption: Contents:
 
    regress
-   storage
-   serializer
-   canonize_policy
+   storages
+   serializers
+   policies
    pytest

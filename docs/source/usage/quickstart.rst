@@ -32,7 +32,7 @@ Basically DefaultRegress is the configured class::
 
 It uses local filesystem storage in `.regress` directory in `storage` parameter.
 
-All objects are dumped with pickle `serializer` :py:class:`.regress.pub.PickleSerializer`, which is supports almost all Python objects, but has only binary representantion in files. It'll be difficult to merge binary changes in the favourite VCS without running code. You can find other serializers in `Serializers <../api/serializer.html>`__ page.
+All objects are dumped with pickle `serializer` :py:class:`.regress.pub.PickleSerializer`, which is supports almost all Python objects, but has only binary representantion in files. It'll be difficult to merge binary changes in the favourite VCS without running code. You can find other serializers in `Serializers <../api/serializers.html>`__ page.
 
 Parameter `canonize_policy` controls behavior when we met result test conflict:
 

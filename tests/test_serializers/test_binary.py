@@ -2,7 +2,8 @@ from io import BytesIO
 
 import pytest
 
-from regress.pub import BinarySerializer, UnserializableTypeError
+from regress.pub import UnserializableTypeError
+from regress.serializers import BinarySerializer
 
 
 def test_simple():
