@@ -19,11 +19,6 @@ def pytest_runtest_makereport(item, call):
 
 def pytest_addoption(parser):
     register_addoption(parser)
-    parser.addoption(
-        '--console',
-        action='store_true',
-        help='run tests using user console input.',
-    )
 
 
 def pytest_configure(config):
