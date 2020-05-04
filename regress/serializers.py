@@ -8,7 +8,7 @@ from regress.exceptions import UnserializableTypeError
 
 
 class BinarySerializer(RegressSerializer):
-    """Serializer for binary data"""
+    """Serializer for binary data."""
 
     def __init__(self, file_type_hint: Optional[FileType] = None):
         super().__init__(file_type_hint=file_type_hint if file_type_hint else
@@ -26,7 +26,7 @@ class BinarySerializer(RegressSerializer):
 
 
 class JsonSerializer(RegressSerializer):
-    """Serializer only json data"""
+    """Serializer for only json data."""
 
     def __init__(self, file_type_hint: Optional[FileType] = None):
         super().__init__(mode='t',
@@ -41,7 +41,7 @@ class JsonSerializer(RegressSerializer):
 
 
 class StringSerializer(RegressSerializer):
-    """Serializer only for string type (utf-8)"""
+    """Serializer only for string type (utf-8)."""
 
     def __init__(self, file_type_hint: Optional[FileType] = None):
         super().__init__(file_type_hint=file_type_hint if file_type_hint else
@@ -58,7 +58,7 @@ class StringSerializer(RegressSerializer):
 
 
 class PickleSerializer(RegressSerializer):
-    """Good serializer for almost all Python objects. But binary"""
+    """Binary serializer for almost all Python objects."""
     PICKLE_PROTOCOL_VERSION = 4
 
     def __init__(self, file_type_hint: Optional[FileType] = None):

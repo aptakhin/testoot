@@ -6,8 +6,8 @@ from regress.base_regress import BaseRegress
 
 
 class Regress:
-    """Helper for tests. Stores regress instance and context and bypasses them
-    to calls"""
+    """Regress main class. Stores base regress instance and context and
+    bypasses them to calls"""
     def __init__(self, base: BaseRegress, context: RegressContext):
         self._base = base
         self._context = context
@@ -16,7 +16,7 @@ class Regress:
              comparator: Optional[Comparator] = None,
              serializer: Optional[RegressSerializer] = None,
              ):
-        """Test object
+        """Test object.
 
         :param obj: test object
         :param suffix: test suffix for making a few regression tests
@@ -37,7 +37,7 @@ class Regress:
                       comparator: Optional[Comparator] = None,
                       serializer: Optional[RegressSerializer] = None,
                       ):
-        """Test generated file content
+        """Test generated file content.
 
         :param filename: test filename
         :param comparator: custom comparator override
