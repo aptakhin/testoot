@@ -142,7 +142,7 @@ class BaseRegress:
                  storage_name: str, context: RegressContext,
                  comparator: Optional[Comparator] = None,
                  serializer: Optional[RegressSerializer] = None):
-        comparator = self._get_comparator(context, comparator)
+        comparator = self._get_comparator(comparator, context=context)
         serializer = self._get_serializer(serializer, context=context)
 
         if canon_obj is None:
@@ -170,12 +170,13 @@ class BaseRegress:
             return self._canonize(test_obj, storage_name=storage_name,
                                   serializer=serializer)
 
-    def _get_comparator(self, context: RegressContext,
-                        comparator: Optional[Comparator] = None) -> Comparator:
+    def _get_comparator(self, comparator: Optional[Comparator], *,
+                        context: RegressContext) -> Comparator:
         return next(filter(lambda x: x is not None, (
             comparator, context.get_comparator(), self._comparator)))
 
-    def _get_serializer(self, serializer: Optional[RegressSerializer],
-                        context: RegressContext) -> RegressSerializer:
+    def _get_serializer(self, serializer: Optional[RegressSerializer], *,
+                        context: RegressContext) \
+            -> RegressSerializer:
         return next(filter(lambda x: x is not None, (
             serializer, context.get_serializer(), self._serializer)))

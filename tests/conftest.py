@@ -1,5 +1,6 @@
 import pytest
 
+from regress.base import RegressTestResult
 from regress.ext.pytest import register_addoption, \
     PytestContext
 from regress.ext.simple import DefaultBaseRegress
@@ -66,8 +67,6 @@ def root_regress(root_base_regress, request):
     yield fixture
 
 
-# @pytest.fixture(scope='function')
-# def binary_regress(regress_instance, request):
-#     fixture = Regress(regress_instance,
-#                       PytestContext(request, serializer=BinarySerializer()))
-#     yield fixture
+class AbcDiffResult(RegressTestResult):
+    def format_diff(self) -> str:
+        return 'abc'

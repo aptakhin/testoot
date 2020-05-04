@@ -1,17 +1,13 @@
 import pytest
 
 from regress.ext.pytest import PytestContext
-from regress.ext.simple import DefaultBaseRegress
 from regress.regress import Regress
-from regress.serializers import PickleSerializer
-from regress.storages import LocalDirectoryStorage
 
 
 @pytest.fixture(scope='module')
-def base_regress():
-    regress = DefaultBaseRegress(
-        storage=LocalDirectoryStorage('.regress/examples'),
-        serializer=PickleSerializer(),
+def base_regress(root_base_regress):
+    regress = root_base_regress.clone(
+        storage=root_base_regress.storage.clone(add_path='examples'),
     )
     regress.storage.ensure_exists()
     yield regress
