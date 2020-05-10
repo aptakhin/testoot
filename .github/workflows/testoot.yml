@@ -1,4 +1,4 @@
-name: Testoot test
+name: Testoot
 
 on:
   push:
