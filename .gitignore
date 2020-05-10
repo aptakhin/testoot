@@ -2,7 +2,7 @@
 docs/build/
 
 # Testoot generated
-.regress/
+.testoot/
 
 # Test
 TEST.sh

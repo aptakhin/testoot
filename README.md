@@ -2,7 +2,7 @@
 
 ![](https://github.com/aptakhin/regress/workflows/Regress%20test/badge.svg)
 [![codecov](https://codecov.io/gh/aptakhin/regress/branch/master/graph/badge.svg)](https://codecov.io/gh/aptakhin/regress)
-[![Documentation Status](https://readthedocs.org/projects/regress/badge/?version=latest)](https://regress.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/testoot/badge/?version=latest)](https://testoot.readthedocs.io/en/latest/?badge=latest)
 [![Maintainability](https://api.codeclimate.com/v1/badges/4bab5c99811799725609/maintainability)](https://codeclimate.com/github/aptakhin/regress/maintainability)
 
 Regression testing framework for Python 3.4+. It's useful in unit and module testing when creating or rewriting test data is too boring. After you canonized the ideal output result all tests will pass until the data changes moment.
@@ -52,9 +52,9 @@ Making virtualenv with development requirements:
     venv/bin/pytest -s tests
     venv/bin/flake8 testoot --show-source --statistics
     venv/bin/pytest --cov=regress --cov-report html
-    
+
 Or for automatizing:
-    
+
     cp TEST.sh.example TEST.sh
     chmod +x TEST.sh
     ./TEST.sh
