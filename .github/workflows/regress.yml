@@ -1,4 +1,4 @@
-name: Regress test
+name: Testoot test
 
 on:
   push:

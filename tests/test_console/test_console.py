@@ -1,15 +1,15 @@
 import pytest
 
-from regress.regress import Regress
+from testoot.testoot import Testoot
 
 
 @pytest.mark.canonize
-def test_simple(regress: Regress):
+def test_simple(testoot: Testoot):
     result = {'a': 1}
-    regress.test(result)  # Commit
+    testoot.test(result)  # Commit
 
     result2 = {'a': 2}  # Try commit change
-    regress.test(result2)
+    testoot.test(result2)
 
 
 if __name__ == '__main__':

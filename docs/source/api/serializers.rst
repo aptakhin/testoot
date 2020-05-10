@@ -1,17 +1,17 @@
 Serializers
 ===================================
 
-.. autoclass:: regress.base.RegressSerializer
+.. autoclass:: testoot.base.TestootSerializer
   :members:
 
-.. autoclass:: regress.serializers.BinarySerializer
+.. autoclass:: testoot.serializers.BinarySerializer
   :members:
 
-.. autoclass:: regress.serializers.JsonSerializer
+.. autoclass:: testoot.serializers.JsonSerializer
   :members:
 
-.. autoclass:: regress.serializers.PickleSerializer
+.. autoclass:: testoot.serializers.PickleSerializer
   :members:
 
-.. autoclass:: regress.serializers.StringSerializer
+.. autoclass:: testoot.serializers.StringSerializer
   :members:

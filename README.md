@@ -18,7 +18,7 @@ Currently integrates best with the PyTest, but other frameworks are also welcome
 One pytest function is the scope of the result. Newly calculated data compares with the original canonized result.
 
     # regress is the function scope helper fixture easy to setup
-    def test_simple(regress: RegressFixture):
+    def test_simple(regress: Testoot):
         result = {'a': 1}
         regress.test(result)  # Commit first time
 
@@ -29,15 +29,15 @@ One pytest function is the scope of the result. Newly calculated data compares w
         with pytest.raises(AssertionError) as e:
             regress.test(result3)
 
-To continue exploring you can visit the [quickstart](https://regress.readthedocs.io/en/latest/usage/quickstart.html).
+To continue exploring you can visit the [quickstart](https://testoot.readthedocs.io/en/latest/usage/quickstart.html).
 
 ## Using
 
-    pip3 install regress
+    pip3 install testoot
 
 ## Documentation
 
-https://regress.readthedocs.io/
+https://testoot.readthedocs.io/
 
 ## Development
 
@@ -50,7 +50,7 @@ Making virtualenv with development requirements:
 ## Testing
 
     venv/bin/pytest -s tests
-    venv/bin/flake8 regress --show-source --statistics
+    venv/bin/flake8 testoot --show-source --statistics
     venv/bin/pytest --cov=regress --cov-report html
     
 Or for automatizing:

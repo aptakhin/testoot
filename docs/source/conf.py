@@ -14,17 +14,17 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('../..'))
 
-import regress
+import testoot
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'Regress'
+project = 'Testoot'
 copyright = '2020, Alexander Ptakhin'
 author = 'Alexander Ptakhin'
 
 # The full version, including alpha/beta/rc tags
-release = regress.version
+release = testoot.version
 
 
 # -- General configuration ---------------------------------------------------

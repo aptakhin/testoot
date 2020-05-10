@@ -1,9 +1,9 @@
 # region: header
 import pytest
 
-from regress.ext.pytest import PytestContext, register_addoption
-from regress.regress import Regress
-from regress.pub import DefaultBaseRegress
+from testoot.ext.pytest import PytestContext, register_addoption
+from testoot.testoot import Testoot
+from testoot.pub import DefaultBaseTestoot
 
 
 def pytest_addoption(parser):
@@ -11,15 +11,15 @@ def pytest_addoption(parser):
 
 
 @pytest.fixture(scope='module')
-def regress_instance():
-    regress = DefaultBaseRegress()
-    regress.storage.ensure_exists()
-    yield regress
+def testoot_instance():
+    testoot = DefaultBaseTestoot()
+    testoot.storage.ensure_exists()
+    yield testoot
 
 
 @pytest.fixture(scope='function')
-def regress(regress_instance, request):
-    fixture = Regress(regress_instance,
+def testoot(testoot_instance, request):
+    fixture = Testoot(testoot_instance,
                       PytestContext(request))
     yield fixture
 # endregion: header
@@ -27,14 +27,14 @@ def regress(regress_instance, request):
 @pytest.mark.no_canonize  # Here for not including to docs page
 # region: test_simple
 # regress is the helper fixture easy to setup
-def test_simple(regress: Regress):
+def test_simple(testoot: Testoot):
     result = {'a': 1}
-    regress.test(result)  # Commit first time
+    testoot.test(result)  # Commit first time
 
     result2 = {'a': 1}
-    regress.test(result2)  # Ok. No object result changes
+    testoot.test(result2)  # Ok. No object result changes
 
     result3 = {'a': 3}  # Try commit change. Raised the AssertionError
     with pytest.raises(AssertionError) as e:
-        regress.test(result3)
+        testoot.test(result3)
 # endregion: test_simple

@@ -1,22 +1,22 @@
 Policies
 ===================================
 
-.. autoclass:: regress.base.CanonizePolicy
+.. autoclass:: testoot.base.CanonizePolicy
   :members:
 
-.. autoclass:: regress.policies.AskCanonizePolicy
+.. autoclass:: testoot.policies.AskCanonizePolicy
   :members:
 
-.. autoclass:: regress.policies.NoCanonizePolicy
+.. autoclass:: testoot.policies.NoCanonizePolicy
   :members:
 
-.. autoclass:: regress.base.UserInteraction
+.. autoclass:: testoot.base.UserInteraction
   :members:
 
-.. autoclass:: regress.user_interactions.ConstantUserInteraction
+.. autoclass:: testoot.user_interactions.ConstantUserInteraction
   :members:
 
-.. autoclass:: regress.user_interactions.ConsoleUserInteraction
+.. autoclass:: testoot.user_interactions.ConsoleUserInteraction
   :members:
 
 Enabled console interaction with `--canonize` flag prints such text in console::

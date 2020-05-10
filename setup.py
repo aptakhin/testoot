@@ -2,27 +2,27 @@ import os
 
 from setuptools import setup
 
-import regress
+import testoot
 
 setup(
-    name="regress",
-    version=regress.version,
+    name="testoot",
+    version=testoot.version,
     long_description=open(os.path.join(os.path.dirname(__file__),
                                        "README.md")).read(),
     long_description_content_type="text/markdown",
-    package_dir={"regress": "regress"},
+    package_dir={"testoot": "testoot"},
     packages=[
-        "regress",
-        "regress.ext",
+        "testoot",
+        "testoot.ext",
     ],
     author="Alexander Ptakhin",
     author_email="me@aptakhin.name",
     description="Library",
     license="MIT",
     keywords="regression testing",
-    url="https://github.com/aptakhin/regress",
+    url="https://github.com/aptakhin/testoot",
     project_urls={
-        "Source Code": "https://github.com/aptakhin/regress",
+        "Source Code": "https://github.com/aptakhin/testoot",
     },
     classifiers=[
         "Development Status :: 3 - Alpha",

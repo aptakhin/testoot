@@ -1,22 +1,18 @@
 import pytest
 
-from regress.ext.pytest import PytestContext
-from regress.ext.simple import DefaultBaseRegress
-from regress.regress import Regress
-from regress.serializers import PickleSerializer
-from regress.storages import LocalDirectoryStorage
+from testoot.ext.pytest import PytestContext
+from testoot.testoot import Testoot
 
 
 @pytest.fixture(scope='module')
-def base_regress():
-    regress = DefaultBaseRegress(
-        storage=LocalDirectoryStorage('.regress/examples'),
-        serializer=PickleSerializer(),
+def base_testoot(root_base_testoot):
+    testoot = root_base_testoot.clone(
+        storage=root_base_testoot.storage.clone(add_path='examples'),
     )
-    regress.storage.ensure_exists()
-    yield regress
+    testoot.storage.ensure_exists()
+    yield testoot
 
 @pytest.fixture(scope='function')
-def regress(base_regress, request):
-    regress = Regress(base_regress, PytestContext(request))
-    yield regress
+def testoot(base_testoot, request):
+    testoot = Testoot(base_testoot, PytestContext(request))
+    yield testoot

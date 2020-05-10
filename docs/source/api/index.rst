@@ -5,7 +5,7 @@ Api
    :maxdepth: 1
    :caption: Contents:
 
-   regress
+   testoot
    storages
    serializers
    policies
