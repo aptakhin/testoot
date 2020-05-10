@@ -34,7 +34,9 @@ class Comparator(ABC):
         pass  # pragma: no cover
 
 
-class RegressTestResult(ABC):
+class TestootTestResult(ABC):
+    __test__ = False
+
     """Abstract test result"""
     @abstractmethod
     def format_diff(self) -> str:
@@ -42,7 +44,9 @@ class RegressTestResult(ABC):
         pass  # pragma: no cover
 
 
-class RegressSerializer(ABC):
+class TestootSerializer(ABC):
+    __test__ = False
+
     """Abstract serializer for objects canonization"""
     def __init__(self, file_type_hint: FileType, mode: str = 'b'):
         """Init
@@ -70,7 +74,9 @@ class RegressSerializer(ABC):
         return self._mode
 
 
-class RegressContext(ABC):
+class TestootContext(ABC):
+    __test__ = False
+
     """Abstract test context"""
     @abstractmethod
     def get_storage_name(self, file_type_hint: FileType,
@@ -83,7 +89,7 @@ class RegressContext(ABC):
         pass  # pragma: no cover
 
     @abstractmethod
-    def get_serializer(self) -> Optional[RegressSerializer]:
+    def get_serializer(self) -> Optional[TestootSerializer]:
         pass  # pragma: no cover
 
     @abstractmethod
@@ -96,20 +102,22 @@ class RegressContext(ABC):
 
     @abstractmethod
     def create_test_result(self, test_obj: any, canon_obj: any,
-                           exc: Exception) -> RegressTestResult:
+                           exc: Exception) -> TestootTestResult:
         pass  # pragma: no cover
 
 
 class CanonizePolicy(ABC):
     """Abstract run decisions with conflicted tests"""
     @abstractmethod
-    def ask_canonize(self, test_result: RegressTestResult) -> bool:
+    def ask_canonize(self, test_result: TestootTestResult) -> bool:
         """Asks user for canonization or decide it by internal tests
         policies"""
         pass  # pragma: no cover
 
 
-class RegressStorage(ABC):
+class TestootStorage(ABC):
+    __test__ = False
+
     """Abstract storage for canonized data"""
     @abstractmethod
     def open_read(self, key: str, mode: str) -> Optional[IOBase]:
@@ -135,6 +143,6 @@ class RegressStorage(ABC):
 class UserInteraction(ABC):
     """Abstract interaction with user"""
     @abstractmethod
-    def ask_canonize(self, test_result: RegressTestResult) -> bool:
+    def ask_canonize(self, test_result: TestootTestResult) -> bool:
         """Asks user for canonization"""
         pass  # pragma: no cover

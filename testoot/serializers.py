@@ -3,11 +3,11 @@ import pickle
 from io import IOBase
 from typing import Optional
 
-from regress.base import RegressSerializer, FileType
-from regress.exceptions import UnserializableTypeError
+from testoot.base import TestootSerializer, FileType
+from testoot.exceptions import UnserializableTypeError
 
 
-class BinarySerializer(RegressSerializer):
+class BinarySerializer(TestootSerializer):
     """Serializer for binary data."""
 
     def __init__(self, file_type_hint: Optional[FileType] = None):
@@ -25,7 +25,7 @@ class BinarySerializer(RegressSerializer):
         return stream.write(obj)
 
 
-class JsonSerializer(RegressSerializer):
+class JsonSerializer(TestootSerializer):
     """Serializer for only json data."""
 
     def __init__(self, file_type_hint: Optional[FileType] = None):
@@ -40,7 +40,7 @@ class JsonSerializer(RegressSerializer):
         json.dump(obj, stream, indent=2, ensure_ascii=False)
 
 
-class StringSerializer(RegressSerializer):
+class StringSerializer(TestootSerializer):
     """Serializer only for string type (utf-8)."""
 
     def __init__(self, file_type_hint: Optional[FileType] = None):
@@ -57,7 +57,7 @@ class StringSerializer(RegressSerializer):
         return stream.write(obj.encode('utf-8'))
 
 
-class PickleSerializer(RegressSerializer):
+class PickleSerializer(TestootSerializer):
     """Binary serializer for almost all Python objects."""
     PICKLE_PROTOCOL_VERSION = 4
 

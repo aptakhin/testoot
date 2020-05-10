@@ -3,7 +3,7 @@ from io import IOBase, TextIOWrapper
 from pathlib import Path
 from typing import Optional
 
-from regress.base import RegressStorage
+from testoot.base import TestootStorage
 
 
 class IoWrapper:
@@ -18,7 +18,7 @@ class IoWrapper:
             if self._stream is not None else None
 
 
-class LocalDirectoryStorage(RegressStorage):
+class LocalDirectoryStorage(TestootStorage):
     """Local directory storage"""
     def __init__(self, root_dir):
         self._root_dir = Path(root_dir)

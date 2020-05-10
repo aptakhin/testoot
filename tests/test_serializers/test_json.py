@@ -2,7 +2,7 @@ from io import BytesIO, TextIOWrapper
 
 import pytest
 
-from regress.serializers import JsonSerializer
+from testoot.serializers import JsonSerializer
 
 
 def test_simple():

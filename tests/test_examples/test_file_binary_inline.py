@@ -1,7 +1,7 @@
 from pathlib import Path
 
-from regress.regress import Regress
-from regress.serializers import BinarySerializer
+from testoot.testoot import Testoot
+from testoot.serializers import BinarySerializer
 
 
 def generate_file(root_dir):
@@ -10,6 +10,6 @@ def generate_file(root_dir):
     return filename
 
 
-def test_file(regress: Regress):
-    regress.test_filename(generate_file(regress.storage.root_dir),
+def test_file(testoot: Testoot):
+    testoot.test_filename(generate_file(testoot.storage.root_dir),
                           serializer=BinarySerializer())

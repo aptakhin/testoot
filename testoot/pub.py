@@ -1,9 +1,9 @@
-from .base import FileType, RegressContext
-from .base_regress import BaseRegress
+from .base import FileType, TestootContext
+from .base_testoot import BaseTestoot
 from .exceptions import UnserializableTypeError
-from .ext.simple import DefaultBaseRegress
+from .ext.simple import DefaultBaseTestoot
 from .policies import AskCanonizePolicy, NoCanonizePolicy
-from .regress import Regress
+from .testoot import Testoot
 from .serializers import BinarySerializer, JsonSerializer, StringSerializer, \
     PickleSerializer
 from .storages import LocalDirectoryStorage
@@ -12,10 +12,10 @@ from .user_interactions import ConsoleUserInteraction, \
 
 __all__ = [
     # Root
-    'BaseRegress',
-    'RegressContext',
-    'Regress',
-    'DefaultBaseRegress',
+    'BaseTestoot',
+    'TestootContext',
+    'Testoot',
+    'DefaultBaseTestoot',
 
     # Misc
     'FileType',

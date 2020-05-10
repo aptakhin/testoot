@@ -2,8 +2,8 @@ from io import BytesIO, TextIOWrapper
 
 import pytest
 
-from regress.pub import UnserializableTypeError
-from regress.serializers import StringSerializer
+from testoot.pub import UnserializableTypeError
+from testoot.serializers import StringSerializer
 
 
 def test_simple():

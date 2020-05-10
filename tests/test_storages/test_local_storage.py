@@ -1,6 +1,6 @@
 import pytest
 
-from regress.storages import LocalDirectoryStorage, IoWrapper
+from testoot.storages import LocalDirectoryStorage, IoWrapper
 
 
 def test_root_clear_exception():

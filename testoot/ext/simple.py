@@ -1,15 +1,15 @@
 from typing import Optional
 
-from regress.base import RegressStorage, RegressSerializer, Comparator, \
+from testoot.base import TestootStorage, TestootSerializer, Comparator, \
     CanonizePolicy
-from regress.base_regress import BaseRegress
+from testoot.base_testoot import BaseTestoot
 
 
-class DefaultBaseRegress(BaseRegress):
-    """Default configured BaseRegress. Stores files in .regress folder
+class DefaultBaseTestoot(BaseTestoot):
+    """Default configured BaseTestoot. Stores files in .testoot folder
     with pickle serializer and throws errors on conflict output"""
-    def __init__(self, *, storage: Optional[RegressStorage] = None,
-                 serializer: Optional[RegressSerializer] = None,
+    def __init__(self, *, storage: Optional[TestootStorage] = None,
+                 serializer: Optional[TestootSerializer] = None,
                  canonize_policy: Optional[CanonizePolicy] = None,
                  comparator: Optional[Comparator] = None):
         """Initialize default regress. Every argument is optional and can
@@ -21,15 +21,15 @@ class DefaultBaseRegress(BaseRegress):
                :class:`AskCanonizePolicy` with
                :class:`ConsoleUserInteraction`
         :param comparator: own comparator or use provided by
-               :class:`RegressContext`.
+               :class:`TestootContext`.
         """
 
-        from regress.pub import LocalDirectoryStorage, AskCanonizePolicy, \
+        from testoot.pub import LocalDirectoryStorage, AskCanonizePolicy, \
             ConsoleUserInteraction
-        from regress.serializers import PickleSerializer
+        from testoot.serializers import PickleSerializer
 
         super().__init__(
-            storage=storage or LocalDirectoryStorage('.regress'),
+            storage=storage or LocalDirectoryStorage('.testoot'),
             serializer=serializer or PickleSerializer(),
             canonize_policy=(canonize_policy or
                              AskCanonizePolicy(ConsoleUserInteraction())),

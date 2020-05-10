@@ -1,8 +1,8 @@
 Storage
 ===================================
 
-.. autoclass:: regress.base.RegressStorage
+.. autoclass:: testoot.base.TestootStorage
   :members:
 
-.. autoclass:: regress.storages.LocalDirectoryStorage
+.. autoclass:: testoot.storages.LocalDirectoryStorage
   :members:

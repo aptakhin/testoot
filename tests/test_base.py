@@ -1,4 +1,4 @@
-from regress.base import FileType
+from testoot.base import FileType
 
 
 def test_file_type():

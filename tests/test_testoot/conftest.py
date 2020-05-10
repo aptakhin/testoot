@@ -2,26 +2,26 @@ from typing import Optional
 
 import pytest
 
-from regress.base import RegressContext, Comparator, RegressSerializer, \
-    FileType, RegressTestResult
-from regress.ext.pytest import PytestContext
-from regress.regress import Regress
+from testoot.base import TestootContext, Comparator, TestootSerializer, \
+    FileType, TestootTestResult
+from testoot.ext.pytest import PytestContext
+from testoot.testoot import Testoot
 from tests.conftest import AbcDiffResult
 
 
 @pytest.fixture(scope='module')
-def base_regress(root_base_regress):
-    regress = root_base_regress.clone(
-        storage=root_base_regress.storage.clone(add_path='examples'),
+def base_testoot(root_base_testoot):
+    testoot = root_base_testoot.clone(
+        storage=root_base_testoot.storage.clone(add_path='examples'),
     )
-    regress.storage.ensure_exists()
-    yield regress
+    testoot.storage.ensure_exists()
+    yield testoot
 
 
 @pytest.fixture(scope='function')
-def regress(base_regress, request):
-    regress = Regress(base_regress, PytestContext(request))
-    yield regress
+def testoot(base_testoot, request):
+    testoot = Testoot(base_testoot, PytestContext(request))
+    yield testoot
 
 
 class TrueComparator(Comparator):
@@ -36,9 +36,9 @@ class FalseComparator(Comparator):
         assert False
 
 
-class ContextRegress(RegressContext):
+class ContextTestoot(TestootContext):
     def __init__(self, name, comparator: Optional[Comparator] = None,
-                 serializer: Optional[RegressSerializer] = None,
+                 serializer: Optional[TestootSerializer] = None,
                  ask_canonize: bool = False):
         self._name = name
         self._comparator = (TrueComparator() if comparator is None
@@ -56,12 +56,12 @@ class ContextRegress(RegressContext):
     def get_comparator(self) -> Optional[Comparator]:
         return self._comparator
 
-    def get_serializer(self) -> Optional[RegressSerializer]:
+    def get_serializer(self) -> Optional[TestootSerializer]:
         return self._serializer
 
     def ask_canonize(self) -> bool:
         return self._ask_canonize
 
     def create_test_result(self, test_obj: any, canon_obj: any,
-                           exc: Exception) -> RegressTestResult:
+                           exc: Exception) -> TestootTestResult:
         return AbcDiffResult()

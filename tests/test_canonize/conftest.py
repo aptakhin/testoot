@@ -1,26 +1,26 @@
 import pytest
 
-from regress.ext.pytest import PytestContext
-from regress.pub import \
+from testoot.ext.pytest import PytestContext
+from testoot.pub import \
     AskCanonizePolicy, ConstantUserInteraction
-from regress.regress import Regress
-from regress.serializers import JsonSerializer
+from testoot.testoot import Testoot
+from testoot.serializers import JsonSerializer
 
 
 @pytest.fixture(scope='module')
-def base_regress(root_base_regress):
-    regress = root_base_regress.clone(
-        storage=root_base_regress.storage.clone(add_path='canonize'),
+def base_testoot(root_base_testoot):
+    testoot = root_base_testoot.clone(
+        storage=root_base_testoot.storage.clone(add_path='canonize'),
         serializer=JsonSerializer(),
         canonize_policy=AskCanonizePolicy(
             ConstantUserInteraction(canonize=False),
         ),
     )
-    regress.storage.ensure_exists()
-    yield regress
+    testoot.storage.ensure_exists()
+    yield testoot
 
 
-class CanonizeRegress(Regress):
+class CanonizeTestoot(Testoot):
     def __init__(self, regress_base, context):
         super().__init__(regress_base, context)
 
@@ -29,7 +29,7 @@ class CanonizeRegress(Regress):
 
 
 @pytest.fixture(scope='function')
-def regress(base_regress, request):
-    regress = CanonizeRegress(base_regress,
+def testoot(base_testoot, request):
+    testoot = CanonizeTestoot(base_testoot,
                               PytestContext(request, ask_canonize=True))
-    yield regress
+    yield testoot

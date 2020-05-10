@@ -1,13 +1,13 @@
 import pytest
 
-from regress.base import RegressTestResult
-from regress.ext.pytest import register_addoption, \
+from testoot.base import TestootTestResult
+from testoot.ext.pytest import register_addoption, \
     PytestContext
-from regress.ext.simple import DefaultBaseRegress
-from regress.pub import AskCanonizePolicy, LocalDirectoryStorage, \
+from testoot.ext.simple import DefaultBaseTestoot
+from testoot.pub import AskCanonizePolicy, LocalDirectoryStorage, \
     ConsoleUserInteraction
-from regress.regress import Regress
-from regress.serializers import BinarySerializer, PickleSerializer
+from testoot.testoot import Testoot
+from testoot.serializers import BinarySerializer, PickleSerializer
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
@@ -45,9 +45,9 @@ def pytest_runtest_setup(item):
 
 
 @pytest.fixture(scope='module')
-def root_base_regress():
-    regress = DefaultBaseRegress(
-        storage=LocalDirectoryStorage('.regress'),
+def root_base_testoot():
+    regress = DefaultBaseTestoot(
+        storage=LocalDirectoryStorage('.testoot'),
         serializer=PickleSerializer(),
         canonize_policy=AskCanonizePolicy(ConsoleUserInteraction()),
     )
@@ -57,11 +57,11 @@ def root_base_regress():
 
 
 @pytest.fixture(scope='function')
-def root_regress(root_base_regress, request):
-    fixture = Regress(root_base_regress, PytestContext(request))
+def root_testoot(root_base_testoot, request):
+    fixture = Testoot(root_base_testoot, PytestContext(request))
     yield fixture
 
 
-class AbcDiffResult(RegressTestResult):
+class AbcDiffResult(TestootTestResult):
     def format_diff(self) -> str:
         return 'abc'

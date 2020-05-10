@@ -1,7 +1,7 @@
 from typing import Optional
 
-from regress.base import RegressContext, FileType, Comparator, \
-    RegressTestResult, RegressSerializer
+from testoot.base import TestootContext, FileType, Comparator, \
+    TestootTestResult, TestootSerializer
 
 
 def _make_filename_from_pytest_nodeid(nodeid):
@@ -19,7 +19,7 @@ class PytestComparator(Comparator):
         assert test_obj == canon_obj
 
 
-class PytestResult(RegressTestResult):
+class PytestResult(TestootTestResult):
     """Pytest test result"""
     def __init__(self, *, test_obj: any, canon_obj: any, exc: Exception,
                  context: 'PytestContext'):
@@ -38,11 +38,11 @@ class PytestResult(RegressTestResult):
         return f'{add_test_name}{compare_result}'
 
 
-class PytestContext(RegressContext):
+class PytestContext(TestootContext):
     """Test context from Pytest"""
 
     def __init__(self, request, comparator: Optional[Comparator] = None,
-                 serializer: Optional[RegressSerializer] = None,
+                 serializer: Optional[TestootSerializer] = None,
                  ask_canonize: bool = False):
         """Initializes pytest context
 
@@ -75,7 +75,7 @@ class PytestContext(RegressContext):
     def get_comparator(self) -> Optional[Comparator]:
         return self._comparator
 
-    def get_serializer(self) -> Optional[RegressSerializer]:
+    def get_serializer(self) -> Optional[TestootSerializer]:
         return self._serializer
 
     def ask_canonize(self) -> bool:
@@ -87,7 +87,7 @@ class PytestContext(RegressContext):
                 or self._ask_canonize)
 
     def create_test_result(self, test_obj: any, canon_obj: any,
-                           exc: Exception) -> RegressTestResult:
+                           exc: Exception) -> TestootTestResult:
         return PytestResult(test_obj=test_obj, canon_obj=canon_obj, exc=exc,
                             context=self)
 

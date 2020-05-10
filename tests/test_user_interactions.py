@@ -1,6 +1,6 @@
 from unittest.mock import MagicMock
 
-from regress.user_interactions import ConsoleUserInteraction, \
+from testoot.user_interactions import ConsoleUserInteraction, \
     ConstantUserInteraction
 from tests.conftest import AbcDiffResult
 

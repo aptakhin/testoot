@@ -1,9 +1,9 @@
-from regress.base import RegressTestResult, UserInteraction
+from testoot.base import TestootTestResult, UserInteraction
 
 
 class ConsoleUserInteraction(UserInteraction):
     """Interactive console canonization asker."""
-    def ask_canonize(self, test_result: RegressTestResult) -> bool:
+    def ask_canonize(self, test_result: TestootTestResult) -> bool:
         """Prints diff and asks user to canonize diff. If get `y`
         returns True."""
         diff = test_result.format_diff()
@@ -29,6 +29,6 @@ class ConstantUserInteraction(UserInteraction):
     def __init__(self, *, canonize):
         self.canonize = canonize
 
-    def ask_canonize(self, test_result: RegressTestResult) -> bool:
+    def ask_canonize(self, test_result: TestootTestResult) -> bool:
         """Returns stored `canonize` value."""
         return self.canonize

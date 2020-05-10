@@ -2,23 +2,23 @@ from pathlib import Path
 
 import pytest
 
-from regress.ext.pytest import PytestContext
-from regress.regress import Regress
-from regress.serializers import BinarySerializer
+from testoot.ext.pytest import PytestContext
+from testoot.testoot import Testoot
+from testoot.serializers import BinarySerializer
 
 
 @pytest.fixture(scope='function')
-def binary_regress(base_regress, request):
-    regress = Regress(base_regress,
+def binary_testoot(base_testoot, request):
+    testoot = Testoot(base_testoot,
                       PytestContext(request, serializer=BinarySerializer()))
-    yield regress
+    yield testoot
 
 
 def generate_file():
-    filename = Path('.regress/examples/generated_file.txt')
+    filename = Path('.testoot/examples/generated_file.txt')
     filename.write_bytes(b'abc')
     return filename
 
 
-def test_file(binary_regress: Regress):
-    binary_regress.test_filename(generate_file())
+def test_file(binary_testoot: Testoot):
+    binary_testoot.test_filename(generate_file())

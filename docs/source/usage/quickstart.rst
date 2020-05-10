@@ -3,7 +3,7 @@ Quickstart
 
 You can install latest version from pypi::
 
-    pip3 install regress
+    pip3 install testoot
 
 And use library such way:
 
@@ -17,12 +17,12 @@ Pytest configuration is the quite simple:
    :start-after: # region: header
    :end-before: # endregion: header
 
-Basically DefaultRegress is the configured class::
+Basically DefaultTestoot is the configured class::
 
-    from regress.pub import Regress, AskCanonizePolicy, PickleSerializer, \
-        LocalDirectoryStorage, DefaultRegress, ConsoleUserInteraction
+    from testoot.pub import Testoot, AskCanonizePolicy, PickleSerializer, \
+        LocalDirectoryStorage, DefaultTestoot, ConsoleUserInteraction
 
-    class DefaultRegress(Regress):
+    class DefaultTestoot(Testoot):
         def __init__(self):
             super().__init__(
                 storage=LocalDirectoryStorage('.regress'),
@@ -30,12 +30,12 @@ Basically DefaultRegress is the configured class::
                 canonize_policy=AskCanonizePolicy(ConsoleUserInteraction())),
             )
 
-It uses local filesystem storage in `.regress` directory in `storage` parameter.
+It uses local filesystem storage in `.testoot` directory in `storage` parameter.
 
-All objects are dumped with pickle `serializer` :py:class:`.regress.pub.PickleSerializer`, which is supports almost all Python objects, but has only binary representantion in files. It'll be difficult to merge binary changes in the favourite VCS without running code. You can find other serializers in `Serializers <../api/serializers.html>`__ page.
+All objects are dumped with pickle `serializer` :py:class:`.testoot.pub.PickleSerializer`, which is supports almost all Python objects, but has only binary representantion in files. It'll be difficult to merge binary changes in the favourite VCS without running code. You can find other serializers in `Serializers <../api/serializers.html>`__ page.
 
 Parameter `canonize_policy` controls behavior when we met result test conflict:
 
-- :py:class:`.regress.pub.AskCanonizePolicy` (default) with `--canonize` pytest flag asks user approval for canonizing. If user refuses it skips for later and raises an error in assert then. For supporing `--canonize` flag :py:func:`.regress.ext.pytest.register_addoption` have to be called in `conftest.py`.
+- :py:class:`.testoot.pub.AskCanonizePolicy` (default) with `--canonize` pytest flag asks user approval for canonizing. If user refuses it skips for later and raises an error in assert then. For supporing `--canonize` flag :py:func:`.testoot.ext.pytest.register_addoption` have to be called in `conftest.py`.
 
-- :py:class:`.regress.pub.NoCanonizePolicy` always raises an error in assert.
+- :py:class:`.testoot.pub.NoCanonizePolicy` always raises an error in assert.
