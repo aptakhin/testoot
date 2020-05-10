@@ -19,7 +19,7 @@ setup(
     author_email="me@aptakhin.name",
     description="Library",
     license="MIT",
-    keywords="regression testing",
+    keywords="testing out of code",
     url="https://github.com/aptakhin/testoot",
     project_urls={
         "Source Code": "https://github.com/aptakhin/testoot",
