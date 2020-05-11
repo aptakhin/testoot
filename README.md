@@ -69,3 +69,7 @@ Using `sphinx`:
 
     cd docs
     make
+
+### Other pipeline
+
+[For release use checklist](https://github.com/aptakhin/testoot/wiki/Public-release-checklist)

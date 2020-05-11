@@ -25,7 +25,7 @@ Basically DefaultTestoot is the configured class::
     class DefaultTestoot(Testoot):
         def __init__(self):
             super().__init__(
-                storage=LocalDirectoryStorage('.regress'),
+                storage=LocalDirectoryStorage('.testoot'),
                 serializer=PickleSerializer(),
                 canonize_policy=AskCanonizePolicy(ConsoleUserInteraction())),
             )
