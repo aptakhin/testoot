@@ -33,12 +33,12 @@ def pytest_configure(config):
 
 
 def pytest_runtest_setup(item):
-    # Skip tests marked with console without --console option
+    # Skip tests marked with canonize without --canonize option
     if any(mark for mark in item.iter_markers(name='canonize')):
         if not item.config.getoption('--canonize'):
             pytest.skip('test requires --canonize flag')
 
-    # Skip tests marked with no_console with --console option
+    # Skip tests marked with no_canonize with --canonize option
     if any(mark for mark in item.iter_markers(name='no_canonize')):
         if item.config.getoption('--canonize'):
             pytest.skip('test no --canonize flag')
