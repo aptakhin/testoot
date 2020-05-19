@@ -5,13 +5,13 @@
 [![Documentation Status](https://readthedocs.org/projects/testoot/badge/?version=latest)](https://testoot.readthedocs.io/en/latest/?badge=latest)
 [![Maintainability](https://api.codeclimate.com/v1/badges/4bab5c99811799725609/maintainability)](https://codeclimate.com/github/aptakhin/regress/maintainability)
 
-Testoot like "test out" of code for Python 3.4+. It's useful in unit and module testing when creating or rewriting test data is too boring. After you canonized the ideal output result all tests will pass until the data changes moment.
+Testoot is "test out" of code for Python 3.4+. It's useful in unit and module testing when creating or rewriting test data is too boring. After you canonized the ideal output result all tests will pass until the data changes moment.
 
-- Writes data to the local filesystem storage
+- Writes test result data to the local filesystem storage
 - Supports binary, text, json and picklable objects
 - Different policies for resolving test conflicts
 
-Currently integrates best with the PyTest, but other frameworks are also welcomed.
+Currently integrates best with the `pytest`, but other frameworks are also welcomed.
 
 ## Example
 
