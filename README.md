@@ -17,17 +17,19 @@ Currently integrates best with the `pytest`, but other frameworks are also welco
 
 One pytest function is the scope of the result. Newly calculated data compares with the original canonized result.
 
-    # testoot is the function scope helper fixture easy to setup
-    def test_simple(testoot: Testoot):
-        result = {'a': 1}
-        testoot.test(result)  # Commit first time
+```python
+# testoot is the function scope helper fixture easy to setup
+def test_simple(testoot: Testoot):
+    result = {'a': 1}
+    testoot.test(result)  # Commit first time
 
-        result2 = {'a': 1}
-        testoot.test(result2)  # Ok. No object result changes
+    result2 = {'a': 1}
+    testoot.test(result2)  # Ok. No object result changes
 
-        result3 = {'a': 3}  # Try commit change. Raised the AssertionError
-        with pytest.raises(AssertionError) as e:
-            testoot.test(result3)
+    result3 = {'a': 3}  # Try commit change. Raised the AssertionError
+    with pytest.raises(AssertionError) as e:
+        testoot.test(result3)
+```
 
 To continue exploring you can visit the [quickstart](https://testoot.readthedocs.io/en/latest/usage/quickstart.html).
 
